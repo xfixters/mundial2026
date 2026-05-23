@@ -12,306 +12,335 @@
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 body{
-    font-family:'Poppins',sans-serif;
-    background:#050816;
-    color:white;
-    overflow-x:hidden;
+font-family:'Poppins',sans-serif;
+background:#050816;
+color:white;
+overflow-x:hidden;
 }
 
 body::before{
-    content:'';
-    position:fixed;
-    inset:0;
-    background:
-    radial-gradient(circle at top left,#0f2a68 0%,transparent 30%),
-    radial-gradient(circle at bottom right,#072b18 0%,transparent 30%);
-    opacity:.7;
-    z-index:-1;
+content:'';
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at top left,#0f2a68 0%,transparent 30%),
+radial-gradient(circle at bottom right,#072b18 0%,transparent 30%);
+opacity:.7;
+z-index:-1;
 }
 
 .header{
-    height:90px;
-    border-bottom:1px solid rgba(255,255,255,.08);
-    display:flex;
-    align-items:center;
-    padding:0 40px;
-    background:rgba(0,0,0,.25);
-    backdrop-filter:blur(10px);
+height:90px;
+border-bottom:1px solid rgba(255,255,255,.08);
+display:flex;
+align-items:center;
+padding:0 40px;
+background:rgba(0,0,0,.25);
+backdrop-filter:blur(10px);
 }
 
 .logo{
-    display:flex;
-    align-items:center;
-    gap:15px;
+display:flex;
+align-items:center;
+gap:15px;
 }
 
 .logo h1{
-    font-size:2.2rem;
+font-size:2.2rem;
 }
 
 .logo span{
-    color:#39ff88;
+color:#39ff88;
 }
 
 .main{
-    display:flex;
-    min-height:calc(100vh - 90px);
+display:flex;
+min-height:calc(100vh - 90px);
 }
 
 .sidebar{
-    width:260px;
-    border-right:1px solid rgba(255,255,255,.08);
-    padding:20px;
-    overflow-y:auto;
+width:260px;
+border-right:1px solid rgba(255,255,255,.08);
+padding:20px;
+overflow-y:auto;
+height:calc(100vh - 90px);
 }
 
 .sidebar h2{
-    margin-bottom:20px;
-    color:#bdbdbd;
-    font-size:1rem;
+margin-bottom:20px;
+color:#bdbdbd;
+font-size:1rem;
 }
 
 .grupo-btn{
-    background:#0d1734;
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:14px;
-    padding:15px;
-    margin-bottom:14px;
-    cursor:pointer;
-    transition:.25s;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    font-weight:600;
+background:#0d1734;
+border:1px solid rgba(255,255,255,.08);
+border-radius:14px;
+padding:15px;
+margin-bottom:14px;
+cursor:pointer;
+transition:.25s;
+display:flex;
+align-items:center;
+gap:12px;
+font-weight:600;
 }
 
 .grupo-btn:hover{
-    transform:translateX(5px);
-    border-color:#39ff88;
+transform:translateX(5px);
+border-color:#39ff88;
 }
 
 .grupo-btn.active{
-    background:linear-gradient(90deg,#114c28,#17351d);
-    border-color:#39ff88;
+background:linear-gradient(90deg,#114c28,#17351d);
+border-color:#39ff88;
 }
 
 .circle{
-    width:32px;
-    height:32px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:700;
-    color:white;
+width:32px;
+height:32px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:700;
+color:white;
 }
 
 .content{
-    flex:1;
-    padding:35px;
+flex:1;
+padding:35px;
 }
 
 .panel{
-    background:rgba(8,12,25,.9);
-    border:1px solid rgba(255,255,255,.06);
-    border-radius:24px;
-    padding:30px;
-    box-shadow:0 10px 30px rgba(0,0,0,.35);
+background:rgba(8,12,25,.9);
+border:1px solid rgba(255,255,255,.06);
+border-radius:24px;
+padding:30px;
+box-shadow:0 10px 30px rgba(0,0,0,.35);
 }
 
 .group-title{
-    font-size:3rem;
-    color:#5cff7f;
-    margin-bottom:25px;
+font-size:3rem;
+color:#5cff7f;
+margin-bottom:25px;
 }
 
 .group-teams{
-    display:flex;
-    gap:25px;
-    margin-bottom:30px;
-    flex-wrap:wrap;
+display:flex;
+gap:25px;
+margin-bottom:30px;
+flex-wrap:wrap;
 }
 
 .team-chip{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-size:1.1rem;
+display:flex;
+align-items:center;
+gap:10px;
+font-size:1.1rem;
 }
 
 .flag{
-    width:34px;
-    border-radius:4px;
+width:34px;
+border-radius:4px;
 }
 
 .grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:25px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:25px;
 }
 
 .matches,
 .table-card{
-    background:#091127;
-    border:1px solid rgba(255,255,255,.06);
-    border-radius:20px;
-    padding:25px;
+background:#091127;
+border:1px solid rgba(255,255,255,.06);
+border-radius:20px;
+padding:25px;
 }
 
 .section-title{
-    font-size:1.5rem;
-    margin-bottom:20px;
-    color:#f1f1f1;
+font-size:1.5rem;
+margin-bottom:20px;
+color:#f1f1f1;
 }
 
 .match{
-    background:#111b35;
-    border-radius:14px;
-    padding:14px;
-    margin-bottom:14px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+background:#111b35;
+border-radius:14px;
+padding:14px;
+margin-bottom:14px;
+display:flex;
+align-items:center;
+justify-content:space-between;
 }
 
 .team{
-    width:180px;
-    display:flex;
-    align-items:center;
-    gap:10px;
+width:180px;
+display:flex;
+align-items:center;
+gap:10px;
 }
 
 .score-box{
-    display:flex;
-    align-items:center;
-    gap:10px;
+display:flex;
+align-items:center;
+gap:10px;
 }
 
 input{
-    width:60px;
-    height:46px;
-    border:none;
-    border-radius:12px;
-    background:#0a1227;
-    border:2px solid #1e365e;
-    color:white;
-    text-align:center;
-    font-size:1.1rem;
-    transition:.2s;
+width:60px;
+height:46px;
+border:none;
+border-radius:12px;
+background:#0a1227;
+border:2px solid #1e365e;
+color:white;
+text-align:center;
+font-size:1.1rem;
+transition:.2s;
 }
 
 input:focus{
-    outline:none;
-    border-color:#39ff88;
-    box-shadow:0 0 10px rgba(57,255,136,.4);
+outline:none;
+border-color:#39ff88;
+box-shadow:0 0 10px rgba(57,255,136,.4);
 }
 
 .vs{
-    font-weight:700;
-    color:#ccc;
+font-weight:700;
+color:#ccc;
 }
 
 table{
-    width:100%;
-    border-collapse:collapse;
+width:100%;
+border-collapse:collapse;
 }
 
 th{
-    background:#16233f;
-    padding:14px;
-    font-size:.95rem;
-    color:#ddd;
+background:#16233f;
+padding:14px;
+font-size:.95rem;
+color:#ddd;
 }
 
 td{
-    padding:16px 10px;
-    border-bottom:1px solid rgba(255,255,255,.06);
-    text-align:center;
+padding:16px 10px;
+border-bottom:1px solid rgba(255,255,255,.06);
+text-align:center;
 }
 
 .rank{
-    width:50px;
-    font-weight:700;
+width:50px;
+font-weight:700;
 }
 
 .team-row{
-    display:flex;
-    align-items:center;
-    gap:10px;
+display:flex;
+align-items:center;
+gap:10px;
 }
 
 .qualify{
-    border-left:4px solid #39ff88;
+border-left:4px solid #39ff88;
 }
 
 .third{
-    border-left:4px solid #4f8cff;
+border-left:4px solid #4f8cff;
 }
 
 .classified{
-    margin-top:25px;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
+margin-top:25px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
 }
 
 .class-box{
-    background:#111c36;
-    border-radius:18px;
-    padding:20px;
-}
-
-.class-box h3{
-    margin-bottom:10px;
+background:#111c36;
+border-radius:18px;
+padding:20px;
 }
 
 .gold{
-    color:#ffd54f;
+color:#ffd54f;
 }
 
 .green{
-    color:#5cff7f;
+color:#5cff7f;
 }
 
 .blue{
-    color:#6aa7ff;
+color:#6aa7ff;
+}
+
+.knockout-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:20px;
+margin-top:20px;
+}
+
+.knockout-match{
+background:#111b35;
+border-radius:16px;
+padding:18px;
+border:1px solid rgba(255,255,255,.06);
+}
+
+.knockout-title{
+margin-bottom:15px;
+font-size:1rem;
+color:#5cff7f;
+font-weight:600;
+}
+
+.knockout-team{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:12px;
+background:#0a1227;
+padding:10px;
+border-radius:10px;
 }
 
 .footer{
-    text-align:center;
-    padding:30px;
-    opacity:.7;
+text-align:center;
+padding:30px;
+opacity:.7;
 }
 
 @media(max-width:1200px){
 
-    .grid{
-        grid-template-columns:1fr;
-    }
+.grid{
+grid-template-columns:1fr;
+}
 
 }
 
 @media(max-width:900px){
 
-    .main{
-        flex-direction:column;
-    }
+.main{
+flex-direction:column;
+}
 
-    .sidebar{
-        width:100%;
-        border-right:none;
-        border-bottom:1px solid rgba(255,255,255,.08);
-    }
+.sidebar{
+width:100%;
+height:auto;
+border-right:none;
+border-bottom:1px solid rgba(255,255,255,.08);
+}
 
-    .classified{
-        grid-template-columns:1fr;
-    }
+.classified{
+grid-template-columns:1fr;
+}
 
 }
 
@@ -322,14 +351,15 @@ td{
 
 <div class="header">
 
-    <div class="logo">
-        <div style="font-size:3rem;">🏆</div>
+<div class="logo">
+<div style="font-size:3rem;">🏆</div>
 
-        <div>
-            <h1>MUNDIAL <span>2026</span></h1>
-            <div>FASE DE GRUPOS</div>
-        </div>
-    </div>
+<div>
+<h1>MUNDIAL <span>2026</span></h1>
+<div>FASE DE GRUPOS</div>
+</div>
+
+</div>
 
 </div>
 
@@ -407,6 +437,36 @@ td{
 <div class="class-box">
 <h3 class="blue">🥉 Mejor tercero</h3>
 <div id="third"></div>
+</div>
+
+</div>
+
+<div style="margin-top:60px;">
+
+<div class="section-title">
+🏆 FASE FINAL
+</div>
+
+<div class="table-card">
+
+<h2>Dieciseisavos</h2>
+<div id="dieciseisavos" class="knockout-grid"></div>
+
+<h2 style="margin-top:40px;">Octavos</h2>
+<div id="octavos" class="knockout-grid"></div>
+
+<h2 style="margin-top:40px;">Cuartos</h2>
+<div id="cuartos" class="knockout-grid"></div>
+
+<h2 style="margin-top:40px;">Semifinales</h2>
+<div id="semis" class="knockout-grid"></div>
+
+<h2 style="margin-top:40px;">Tercer Puesto</h2>
+<div id="tercer" class="knockout-grid"></div>
+
+<h2 style="margin-top:40px;">Final</h2>
+<div id="final" class="knockout-grid"></div>
+
 </div>
 
 </div>
@@ -547,8 +607,6 @@ teams:[
 
 };
 
-let currentGroup = "A";
-
 const matchesData = [
 [0,1],
 [2,3],
@@ -558,15 +616,15 @@ const matchesData = [
 [1,2]
 ];
 
+let currentGroup = "A";
+
 const sidebar = document.getElementById("sidebar-groups");
 
 Object.keys(groups).forEach(key=>{
 
 sidebar.innerHTML += `
 
-<div class="grupo-btn ${key==="A" ? "active" : ""}" 
-data-group="${key}" 
-onclick="loadGroup('${key}')">
+<div class="grupo-btn ${key==="A" ? "active" : ""}" onclick="loadGroup('${key}')" data-group="${key}">
 
 <div class="circle" style="background:${groups[key].color};">
 ${key}
@@ -772,6 +830,87 @@ document.getElementById("second").innerHTML = sorted[1];
 document.getElementById("third").innerHTML = sorted[2];
 
 }
+
+function createKnockout(id,title,count){
+
+const container = document.getElementById(id);
+
+for(let i=1;i<=count;i++){
+
+container.innerHTML += `
+
+<div class="knockout-match">
+
+<div class="knockout-title">
+${title} ${i}
+</div>
+
+<div class="knockout-team">
+<div>Equipo 1</div>
+<input type="number" class="knockout-score">
+</div>
+
+<div class="knockout-team">
+<div>Equipo 2</div>
+<input type="number" class="knockout-score">
+</div>
+
+</div>
+
+`;
+
+}
+
+}
+
+createKnockout("dieciseisavos","Partido",8);
+createKnockout("octavos","Octavo",8);
+createKnockout("cuartos","Cuarto",4);
+createKnockout("semis","Semifinal",2);
+
+document.getElementById("tercer").innerHTML = `
+
+<div class="knockout-match">
+
+<div class="knockout-title">
+🥉 Tercer Puesto
+</div>
+
+<div class="knockout-team">
+<div>Semifinalista 1</div>
+<input type="number" class="knockout-score">
+</div>
+
+<div class="knockout-team">
+<div>Semifinalista 2</div>
+<input type="number" class="knockout-score">
+</div>
+
+</div>
+
+`;
+
+document.getElementById("final").innerHTML = `
+
+<div class="knockout-match">
+
+<div class="knockout-title">
+🏆 FINAL
+</div>
+
+<div class="knockout-team">
+<div>Finalista 1</div>
+<input type="number" class="knockout-score">
+</div>
+
+<div class="knockout-team">
+<div>Finalista 2</div>
+<input type="number" class="knockout-score">
+</div>
+
+</div>
+
+`;
 
 loadGroup("A");
 
