@@ -19,154 +19,319 @@
 
 body{
     font-family:'Poppins',sans-serif;
-    background:
-    linear-gradient(rgba(10,10,10,.92),rgba(10,10,10,.95)),
-    url('https://images.unsplash.com/photo-1517927033932-b3d18e61fb3a?q=80&w=2070');
-    background-size:cover;
-    background-attachment:fixed;
+    background:#050816;
     color:white;
-    padding:30px;
+    overflow-x:hidden;
 }
 
-h1{
-    text-align:center;
-    font-size:3rem;
-    margin-bottom:40px;
-    font-weight:700;
+body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(circle at top left,#0f2a68 0%,transparent 30%),
+    radial-gradient(circle at bottom right,#072b18 0%,transparent 30%);
+    opacity:.7;
+    z-index:-1;
 }
 
-#contenedor-grupos{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(500px,1fr));
-    gap:30px;
-}
-
-.grupo{
-    background:rgba(25,25,25,.95);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:20px;
-    padding:25px;
-    backdrop-filter:blur(10px);
-    box-shadow:0 10px 30px rgba(0,0,0,.4);
-    transition:.3s;
-}
-
-.grupo:hover{
-    transform:translateY(-5px);
-}
-
-.grupo h2{
-    margin-bottom:20px;
-    font-size:1.8rem;
-}
-
-.partido{
+.header{
+    height:90px;
+    border-bottom:1px solid rgba(255,255,255,.08);
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:10px;
-    margin-bottom:15px;
-    background:#222;
-    padding:10px;
-    border-radius:12px;
+    padding:0 40px;
+    background:rgba(0,0,0,.25);
+    backdrop-filter:blur(10px);
 }
 
-.equipo{
+.logo{
     display:flex;
     align-items:center;
-    gap:8px;
-    width:150px;
+    gap:15px;
 }
 
-.bandera{
-    width:28px;
-    height:20px;
-    object-fit:cover;
-    border-radius:3px;
+.logo h1{
+    font-size:2.2rem;
+}
+
+.logo span{
+    color:#39ff88;
+}
+
+.live{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:1rem;
+}
+
+.dot{
+    width:12px;
+    height:12px;
+    background:#39ff88;
+    border-radius:50%;
+    animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+    0%{opacity:1;}
+    50%{opacity:.4;}
+    100%{opacity:1;}
+}
+
+.main{
+    display:flex;
+    min-height:calc(100vh - 90px);
+}
+
+.sidebar{
+    width:260px;
+    border-right:1px solid rgba(255,255,255,.08);
+    padding:20px;
+}
+
+.sidebar h2{
+    margin-bottom:20px;
+    color:#bdbdbd;
+    font-size:1rem;
+}
+
+.grupo-btn{
+    background:#0d1734;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:14px;
+    padding:15px;
+    margin-bottom:14px;
+    cursor:pointer;
+    transition:.25s;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-weight:600;
+}
+
+.grupo-btn:hover{
+    transform:translateX(5px);
+    border-color:#39ff88;
+}
+
+.grupo-btn.active{
+    background:linear-gradient(90deg,#114c28,#17351d);
+    border-color:#39ff88;
+}
+
+.circle{
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    color:white;
+}
+
+.content{
+    flex:1;
+    padding:35px;
+}
+
+.panel{
+    background:rgba(8,12,25,.9);
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:24px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+.group-title{
+    font-size:3rem;
+    color:#5cff7f;
+    margin-bottom:25px;
+}
+
+.group-teams{
+    display:flex;
+    gap:25px;
+    margin-bottom:30px;
+    flex-wrap:wrap;
+}
+
+.team-chip{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:1.1rem;
+}
+
+.flag{
+    width:34px;
+    border-radius:4px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+.matches,
+.table-card{
+    background:#091127;
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:20px;
+    padding:25px;
+}
+
+.section-title{
+    font-size:1.5rem;
+    margin-bottom:20px;
+    color:#f1f1f1;
+}
+
+.match{
+    background:#111b35;
+    border-radius:14px;
+    padding:14px;
+    margin-bottom:14px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.team{
+    width:180px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.score-box{
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
 input{
-    width:55px;
-    height:40px;
-    background:#111;
-    border:2px solid #333;
+    width:60px;
+    height:46px;
+    border:none;
+    border-radius:12px;
+    background:#0a1227;
+    border:2px solid #1e365e;
     color:white;
-    border-radius:10px;
     text-align:center;
-    font-size:1rem;
+    font-size:1.1rem;
     transition:.2s;
 }
 
 input:focus{
     outline:none;
-    border-color:#00ff9d;
+    border-color:#39ff88;
+    box-shadow:0 0 10px rgba(57,255,136,.4);
 }
 
 .vs{
     font-weight:700;
-    opacity:.7;
+    color:#ccc;
 }
 
 table{
     width:100%;
-    margin-top:25px;
     border-collapse:collapse;
-    overflow:hidden;
-    border-radius:15px;
 }
 
 th{
-    background:#00c977;
-    padding:12px;
-    font-size:.9rem;
+    background:#16233f;
+    padding:14px;
+    font-size:.95rem;
+    color:#ddd;
 }
 
 td{
-    padding:12px;
+    padding:16px 10px;
+    border-bottom:1px solid rgba(255,255,255,.06);
     text-align:center;
-    border-bottom:1px solid rgba(255,255,255,.05);
-    background:#1a1a1a;
 }
 
-tr:hover td{
-    background:#252525;
+.rank{
+    width:50px;
+    font-weight:700;
 }
 
-.equipo-tabla{
+.team-row{
     display:flex;
     align-items:center;
     gap:10px;
 }
 
-.clasificados{
-    margin-top:20px;
-    background:#111;
-    padding:15px;
-    border-radius:12px;
+.qualify{
+    border-left:4px solid #39ff88;
 }
 
-.clasificados h3{
+.third{
+    border-left:4px solid #4f8cff;
+}
+
+.classified{
+    margin-top:25px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.class-box{
+    background:#111c36;
+    border-radius:18px;
+    padding:20px;
+}
+
+.class-box h3{
     margin-bottom:10px;
-    color:#00ff9d;
 }
 
-.top{
-    color:#00ff9d;
-    font-weight:600;
+.gold{
+    color:#ffd54f;
 }
 
-@media(max-width:700px){
+.green{
+    color:#5cff7f;
+}
 
-    #contenedor-grupos{
+.blue{
+    color:#6aa7ff;
+}
+
+.footer{
+    text-align:center;
+    padding:30px;
+    opacity:.7;
+}
+
+@media(max-width:1200px){
+
+    .grid{
         grid-template-columns:1fr;
     }
 
-    .partido{
+}
+
+@media(max-width:900px){
+
+    .main{
         flex-direction:column;
     }
 
-    .equipo{
-        justify-content:center;
+    .sidebar{
+        width:100%;
+        border-right:none;
+        border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    .classified{
+        grid-template-columns:1fr;
     }
 
 }
@@ -175,211 +340,319 @@ tr:hover td{
 </head>
 <body>
 
-<h1>🏆 Mundial 2026</h1>
+<div class="header">
 
-<div id="contenedor-grupos"></div>
+    <div class="logo">
+        <div style="font-size:3rem;">🏆</div>
 
-<script>
+        <div>
+            <h1>MUNDIAL <span>2026</span></h1>
+            <div>FASE DE GRUPOS</div>
+        </div>
+    </div>
 
-const grupos = {
+    <div class="live">
+        <div class="dot"></div>
+        En vivo
+    </div>
 
-A:[
-["México","https://flagcdn.com/w40/mx.png"],
-["Sudáfrica","https://flagcdn.com/w40/za.png"],
-["Corea del Sur","https://flagcdn.com/w40/kr.png"],
-["República Checa","https://flagcdn.com/w40/cz.png"]
-]
+</div>
 
-};
+<div class="main">
 
-const contenedor = document.getElementById("contenedor-grupos");
+    <div class="sidebar">
 
-function crearGrupo(nombre,equipos){
+        <h2>GRUPOS</h2>
 
-    const partidos = [
-        [0,1],
-        [2,3],
-        [0,2],
-        [1,3],
-        [0,3],
-        [1,2]
-    ];
+        <div class="grupo-btn active">
+            <div class="circle" style="background:#26a65b;">🇲🇽</div>
+            Grupo A
+        </div>
 
-    const div = document.createElement("div");
-    div.className = "grupo";
+    </div>
 
-    let htmlPartidos = "";
+    <div class="content">
 
-    partidos.forEach((p,index)=>{
+        <div class="panel">
 
-        htmlPartidos += `
-
-        <div class="partido">
-
-            <div class="equipo">
-                <img class="bandera" src="${equipos[p[0]][1]}">
-                ${equipos[p[0]][0]}
+            <div class="group-title">
+                Grupo A
             </div>
 
-            <input type="number" min="0" id="${nombre}-${index}-a">
+            <div class="group-teams">
 
-            <div class="vs">VS</div>
+                <div class="team-chip">
+                    <img class="flag" src="https://flagcdn.com/w40/mx.png">
+                    México
+                </div>
 
-            <input type="number" min="0" id="${nombre}-${index}-b">
+                <div class="team-chip">
+                    <img class="flag" src="https://flagcdn.com/w40/za.png">
+                    Sudáfrica
+                </div>
 
-            <div class="equipo">
-                <img class="bandera" src="${equipos[p[1]][1]}">
-                ${equipos[p[1]][0]}
+                <div class="team-chip">
+                    <img class="flag" src="https://flagcdn.com/w40/kr.png">
+                    Corea del Sur
+                </div>
+
+                <div class="team-chip">
+                    <img class="flag" src="https://flagcdn.com/w40/cz.png">
+                    República Checa
+                </div>
+
+            </div>
+
+            <div class="grid">
+
+                <div class="matches">
+
+                    <div class="section-title">
+                        ⚽ PARTIDOS
+                    </div>
+
+                    <div id="matches"></div>
+
+                </div>
+
+                <div class="table-card">
+
+                    <div class="section-title">
+                        📊 TABLA DE POSICIONES
+                    </div>
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>#</th>
+                                <th>Equipo</th>
+                                <th>PTS</th>
+                                <th>GF</th>
+                                <th>GC</th>
+                                <th>DG</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="tabla"></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+            <div class="classified">
+
+                <div class="class-box">
+                    <h3 class="gold">🥇 1° Clasificado</h3>
+                    <div id="first"></div>
+                </div>
+
+                <div class="class-box">
+                    <h3 class="green">🥈 2° Clasificado</h3>
+                    <div id="second"></div>
+                </div>
+
+                <div class="class-box">
+                    <h3 class="blue">🥉 Mejor tercero</h3>
+                    <div id="third"></div>
+                </div>
+
             </div>
 
         </div>
 
-        `;
-    });
+    </div>
 
-    div.innerHTML = `
+</div>
 
-    <h2>Grupo ${nombre}</h2>
+<div class="footer">
+    Mundial 2026 — Hecho para los fanáticos del fútbol ❤️
+</div>
 
-    ${htmlPartidos}
+<script>
 
-    <table id="tabla-${nombre}">
-        <thead>
-            <tr>
-                <th>Equipo</th>
-                <th>PTS</th>
-                <th>GF</th>
-                <th>GC</th>
-                <th>DG</th>
-            </tr>
-        </thead>
+const teams = [
 
-        <tbody></tbody>
+{
+    name:"México",
+    flag:"https://flagcdn.com/w40/mx.png"
+},
 
-    </table>
+{
+    name:"Sudáfrica",
+    flag:"https://flagcdn.com/w40/za.png"
+},
 
-    <div class="clasificados" id="clasificados-${nombre}"></div>
+{
+    name:"Corea del Sur",
+    flag:"https://flagcdn.com/w40/kr.png"
+},
+
+{
+    name:"República Checa",
+    flag:"https://flagcdn.com/w40/cz.png"
+}
+
+];
+
+const matchesData = [
+
+[0,1],
+[2,3],
+[0,2],
+[1,3],
+[0,3],
+[1,2]
+
+];
+
+const matchesDiv = document.getElementById("matches");
+
+matchesData.forEach((m,index)=>{
+
+    matchesDiv.innerHTML += `
+
+    <div class="match">
+
+        <div class="team">
+            <img class="flag" src="${teams[m[0]].flag}">
+            ${teams[m[0]].name}
+        </div>
+
+        <div class="score-box">
+
+            <input type="number" min="0" id="a${index}">
+            <div class="vs">VS</div>
+            <input type="number" min="0" id="b${index}">
+
+        </div>
+
+        <div class="team">
+            <img class="flag" src="${teams[m[1]].flag}">
+            ${teams[m[1]].name}
+        </div>
+
+    </div>
 
     `;
 
-    contenedor.appendChild(div);
+});
 
-    document.querySelectorAll("input").forEach(input=>{
+document.querySelectorAll("input").forEach(input=>{
 
-        input.addEventListener("keyup",(e)=>{
+    input.addEventListener("keyup",e=>{
 
-            if(e.key === "Enter"){
-                actualizarGrupo(nombre);
-            }
-
-        });
+        if(e.key==="Enter"){
+            updateTable();
+        }
 
     });
 
-    actualizarGrupo(nombre);
+});
 
-}
+function updateTable(){
 
-function actualizarGrupo(nombre){
+    let stats = {};
 
-    const equipos = grupos[nombre];
+    teams.forEach(t=>{
 
-    const tabla = {};
-
-    equipos.forEach(eq=>{
-
-        tabla[eq[0]] = {
+        stats[t.name] = {
             pts:0,
             gf:0,
             gc:0,
             dg:0,
-            bandera:eq[1]
+            flag:t.flag
         };
 
     });
 
-    const partidos = [
-        [0,1],
-        [2,3],
-        [0,2],
-        [1,3],
-        [0,3],
-        [1,2]
-    ];
+    matchesData.forEach((m,index)=>{
 
-    partidos.forEach((p,index)=>{
-
-        const a = document.getElementById(`${nombre}-${index}-a`).value;
-        const b = document.getElementById(`${nombre}-${index}-b`).value;
+        let a = document.getElementById(`a${index}`).value;
+        let b = document.getElementById(`b${index}`).value;
 
         if(a==="" || b==="") return;
 
-        const ga = parseInt(a);
-        const gb = parseInt(b);
+        a = parseInt(a);
+        b = parseInt(b);
 
-        const eqA = equipos[p[0]][0];
-        const eqB = equipos[p[1]][0];
+        const teamA = teams[m[0]].name;
+        const teamB = teams[m[1]].name;
 
-        tabla[eqA].gf += ga;
-        tabla[eqA].gc += gb;
+        stats[teamA].gf += a;
+        stats[teamA].gc += b;
 
-        tabla[eqB].gf += gb;
-        tabla[eqB].gc += ga;
+        stats[teamB].gf += b;
+        stats[teamB].gc += a;
 
-        if(ga>gb){
-            tabla[eqA].pts += 3;
+        if(a>b){
+
+            stats[teamA].pts += 3;
+
         }
 
-        else if(gb>ga){
-            tabla[eqB].pts += 3;
+        else if(b>a){
+
+            stats[teamB].pts += 3;
+
         }
 
         else{
-            tabla[eqA].pts += 1;
-            tabla[eqB].pts += 1;
+
+            stats[teamA].pts += 1;
+            stats[teamB].pts += 1;
+
         }
 
     });
 
-    Object.keys(tabla).forEach(eq=>{
-        tabla[eq].dg = tabla[eq].gf - tabla[eq].gc;
-    });
+    Object.keys(stats).forEach(team=>{
 
-    const ordenados = Object.keys(tabla).sort((a,b)=>{
-
-        if(tabla[b].pts !== tabla[a].pts)
-            return tabla[b].pts - tabla[a].pts;
-
-        if(tabla[b].dg !== tabla[a].dg)
-            return tabla[b].dg - tabla[a].dg;
-
-        return tabla[b].gf - tabla[a].gf;
+        stats[team].dg = stats[team].gf - stats[team].gc;
 
     });
 
-    const tbody = document.querySelector(`#tabla-${nombre} tbody`);
+    const sorted = Object.keys(stats).sort((a,b)=>{
+
+        if(stats[b].pts !== stats[a].pts)
+            return stats[b].pts - stats[a].pts;
+
+        if(stats[b].dg !== stats[a].dg)
+            return stats[b].dg - stats[a].dg;
+
+        return stats[b].gf - stats[a].gf;
+
+    });
+
+    const tbody = document.getElementById("tabla");
 
     tbody.innerHTML = "";
 
-    ordenados.forEach(eq=>{
+    sorted.forEach((team,index)=>{
 
         tbody.innerHTML += `
 
-        <tr>
+        <tr class="${index<2 ? 'qualify' : index===2 ? 'third' : ''}">
+
+            <td class="rank">${index+1}</td>
 
             <td>
 
-                <div class="equipo-tabla">
-                    <img class="bandera" src="${tabla[eq].bandera}">
-                    ${eq}
+                <div class="team-row">
+                    <img class="flag" src="${stats[team].flag}">
+                    ${team}
                 </div>
 
             </td>
 
-            <td>${tabla[eq].pts}</td>
-            <td>${tabla[eq].gf}</td>
-            <td>${tabla[eq].gc}</td>
-            <td>${tabla[eq].dg}</td>
+            <td>${stats[team].pts}</td>
+            <td>${stats[team].gf}</td>
+            <td>${stats[team].gc}</td>
+            <td>${stats[team].dg}</td>
 
         </tr>
 
@@ -387,22 +660,13 @@ function actualizarGrupo(nombre){
 
     });
 
-    document.getElementById(`clasificados-${nombre}`).innerHTML = `
-
-    <h3>Clasificados</h3>
-
-    <div class="top">1° ${ordenados[0]}</div>
-    <div class="top">2° ${ordenados[1]}</div>
-
-    `;
+    document.getElementById("first").innerHTML = sorted[0];
+    document.getElementById("second").innerHTML = sorted[1];
+    document.getElementById("third").innerHTML = sorted[2];
 
 }
 
-Object.keys(grupos).forEach(g=>{
-
-    crearGrupo(g,grupos[g]);
-
-});
+updateTable();
 
 </script>
 
