@@ -68,6 +68,7 @@ body::before{
     width:260px;
     border-right:1px solid rgba(255,255,255,.08);
     padding:20px;
+    overflow-y:auto;
 }
 
 .sidebar h2{
@@ -336,366 +337,443 @@ td{
 
 <div class="sidebar">
 
-    <h2>GRUPOS</h2>
+<h2>GRUPOS</h2>
 
-    <div class="grupo-btn active">
-        <div class="circle" style="background:#26a65b;">A</div>
-        Grupo A
-    </div>
-
-    <div class="grupo-btn">
-        <div class="circle" style="background:#e74c3c;">B</div>
-        Grupo B
-    </div>
-
-    <div class="grupo-btn">
-        <div class="circle" style="background:#f39c12;">C</div>
-        Grupo C
-    </div>
-
-    <div class="grupo-btn">
-        <div class="circle" style="background:#c0392b;">D</div>
-        Grupo D
-    </div>
-
-    <div class="grupo-btn">
-        <div class="circle" style="background:#27ae60;">E</div>
-        Grupo E
-    </div>
-
-    <div class="grupo-btn">
-        <div class="circle" style="background:#2e86de;">F</div>
-        Grupo F
-    </div>
-
-    <div class="grupo-btn">
-        <div class="circle" style="background:#f1c40f;">G</div>
-        Grupo G
-    </div>
-
-    <div class="grupo-btn">
-        <div class="circle" style="background:#ff0033;">H</div>
-        Grupo H
-    </div>
-
-    <div class="grupo-btn">
-        <div class="circle" style="background:#6c5ce7;">I</div>
-        Grupo I
-    </div>
-
-    <div class="grupo-btn">
-        <div class="circle" style="background:#0984e3;">J</div>
-        Grupo J
-    </div>
-
-    <div class="grupo-btn">
-        <div class="circle" style="background:#6c5ce7;">K</div>
-        Grupo K
-    </div>
-
-    <div class="grupo-btn">
-        <div class="circle" style="background:#e67e22;">L</div>
-        Grupo L
-    </div>
+<div id="sidebar-groups"></div>
 
 </div>
 
-    <div class="content">
+<div class="content">
 
-        <div class="panel">
+<div class="panel">
 
-            <div class="group-title">
-                Grupo A
-            </div>
+<div class="group-title"></div>
 
-            <div class="group-teams">
+<div class="group-teams"></div>
 
-                <div class="team-chip">
-                    <img class="flag" src="https://flagcdn.com/w40/mx.png">
-                    México
-                </div>
+<div class="grid">
 
-                <div class="team-chip">
-                    <img class="flag" src="https://flagcdn.com/w40/za.png">
-                    Sudáfrica
-                </div>
+<div class="matches">
 
-                <div class="team-chip">
-                    <img class="flag" src="https://flagcdn.com/w40/kr.png">
-                    Corea del Sur
-                </div>
+<div class="section-title">
+⚽ PARTIDOS
+</div>
 
-                <div class="team-chip">
-                    <img class="flag" src="https://flagcdn.com/w40/cz.png">
-                    República Checa
-                </div>
+<div id="matches"></div>
 
-            </div>
+</div>
 
-            <div class="grid">
+<div class="table-card">
 
-                <div class="matches">
+<div class="section-title">
+📊 TABLA DE POSICIONES
+</div>
 
-                    <div class="section-title">
-                        ⚽ PARTIDOS
-                    </div>
+<table>
 
-                    <div id="matches"></div>
+<thead>
 
-                </div>
+<tr>
+<th>#</th>
+<th>Equipo</th>
+<th>PTS</th>
+<th>GF</th>
+<th>GC</th>
+<th>DG</th>
+</tr>
 
-                <div class="table-card">
+</thead>
 
-                    <div class="section-title">
-                        📊 TABLA DE POSICIONES
-                    </div>
+<tbody id="tabla"></tbody>
 
-                    <table>
+</table>
 
-                        <thead>
+</div>
 
-                            <tr>
-                                <th>#</th>
-                                <th>Equipo</th>
-                                <th>PTS</th>
-                                <th>GF</th>
-                                <th>GC</th>
-                                <th>DG</th>
-                            </tr>
+</div>
 
-                        </thead>
+<div class="classified">
 
-                        <tbody id="tabla"></tbody>
+<div class="class-box">
+<h3 class="gold">🥇 1° Clasificado</h3>
+<div id="first"></div>
+</div>
 
-                    </table>
+<div class="class-box">
+<h3 class="green">🥈 2° Clasificado</h3>
+<div id="second"></div>
+</div>
 
-                </div>
+<div class="class-box">
+<h3 class="blue">🥉 Mejor tercero</h3>
+<div id="third"></div>
+</div>
 
-            </div>
+</div>
 
-            <div class="classified">
+</div>
 
-                <div class="class-box">
-                    <h3 class="gold">🥇 1° Clasificado</h3>
-                    <div id="first"></div>
-                </div>
-
-                <div class="class-box">
-                    <h3 class="green">🥈 2° Clasificado</h3>
-                    <div id="second"></div>
-                </div>
-
-                <div class="class-box">
-                    <h3 class="blue">🥉 Mejor tercero</h3>
-                    <div id="third"></div>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
+</div>
 
 </div>
 
 <div class="footer">
-    Mundial 2026 — Hecho para los fanáticos del fútbol ❤️
+Mundial 2026 — Hecho para los fanáticos del fútbol ❤️
 </div>
 
 <script>
 
-const teams = [
+const groups = {
 
-{
-    name:"México",
-    flag:"https://flagcdn.com/w40/mx.png"
+A:{
+color:"#26a65b",
+teams:[
+["México","https://flagcdn.com/w40/mx.png"],
+["Sudáfrica","https://flagcdn.com/w40/za.png"],
+["Corea del Sur","https://flagcdn.com/w40/kr.png"],
+["República Checa","https://flagcdn.com/w40/cz.png"]
+]
 },
 
-{
-    name:"Sudáfrica",
-    flag:"https://flagcdn.com/w40/za.png"
+B:{
+color:"#e74c3c",
+teams:[
+["Canadá","https://flagcdn.com/w40/ca.png"],
+["Bosnia","https://flagcdn.com/w40/ba.png"],
+["Qatar","https://flagcdn.com/w40/qa.png"],
+["Suiza","https://flagcdn.com/w40/ch.png"]
+]
 },
 
-{
-    name:"Corea del Sur",
-    flag:"https://flagcdn.com/w40/kr.png"
+C:{
+color:"#f39c12",
+teams:[
+["Brasil","https://flagcdn.com/w40/br.png"],
+["Marruecos","https://flagcdn.com/w40/ma.png"],
+["Haití","https://flagcdn.com/w40/ht.png"],
+["Escocia","https://flagcdn.com/w40/gb-sct.png"]
+]
 },
 
-{
-    name:"República Checa",
-    flag:"https://flagcdn.com/w40/cz.png"
+D:{
+color:"#c0392b",
+teams:[
+["Estados Unidos","https://flagcdn.com/w40/us.png"],
+["Paraguay","https://flagcdn.com/w40/py.png"],
+["Australia","https://flagcdn.com/w40/au.png"],
+["Turquía","https://flagcdn.com/w40/tr.png"]
+]
+},
+
+E:{
+color:"#27ae60",
+teams:[
+["Alemania","https://flagcdn.com/w40/de.png"],
+["Curazao","https://flagcdn.com/w40/cw.png"],
+["Costa de Marfil","https://flagcdn.com/w40/ci.png"],
+["Ecuador","https://flagcdn.com/w40/ec.png"]
+]
+},
+
+F:{
+color:"#2e86de",
+teams:[
+["Países Bajos","https://flagcdn.com/w40/nl.png"],
+["Japón","https://flagcdn.com/w40/jp.png"],
+["Suecia","https://flagcdn.com/w40/se.png"],
+["Túnez","https://flagcdn.com/w40/tn.png"]
+]
+},
+
+G:{
+color:"#f1c40f",
+teams:[
+["Bélgica","https://flagcdn.com/w40/be.png"],
+["Egipto","https://flagcdn.com/w40/eg.png"],
+["Irlanda","https://flagcdn.com/w40/ie.png"],
+["Venezuela","https://flagcdn.com/w40/ve.png"]
+]
+},
+
+H:{
+color:"#ff0033",
+teams:[
+["España","https://flagcdn.com/w40/es.png"],
+["Uruguay","https://flagcdn.com/w40/uy.png"],
+["Arabia Saudita","https://flagcdn.com/w40/sa.png"],
+["Cabo Verde","https://flagcdn.com/w40/cv.png"]
+]
+},
+
+I:{
+color:"#6c5ce7",
+teams:[
+["Francia","https://flagcdn.com/w40/fr.png"],
+["Irak","https://flagcdn.com/w40/iq.png"],
+["Dinamarca","https://flagcdn.com/w40/dk.png"],
+["Camerún","https://flagcdn.com/w40/cm.png"]
+]
+},
+
+J:{
+color:"#0984e3",
+teams:[
+["Argentina","https://flagcdn.com/w40/ar.png"],
+["Austria","https://flagcdn.com/w40/at.png"],
+["Jordania","https://flagcdn.com/w40/jo.png"],
+["Nigeria","https://flagcdn.com/w40/ng.png"]
+]
+},
+
+K:{
+color:"#6c5ce7",
+teams:[
+["Italia","https://flagcdn.com/w40/it.png"],
+["Colombia","https://flagcdn.com/w40/co.png"],
+["Noruega","https://flagcdn.com/w40/no.png"],
+["Nueva Zelanda","https://flagcdn.com/w40/nz.png"]
+]
+},
+
+L:{
+color:"#e67e22",
+teams:[
+["Inglaterra","https://flagcdn.com/w40/gb-eng.png"],
+["Croacia","https://flagcdn.com/w40/hr.png"],
+["Ghana","https://flagcdn.com/w40/gh.png"],
+["Panamá","https://flagcdn.com/w40/pa.png"]
+]
 }
 
-];
+};
+
+let currentGroup = "A";
 
 const matchesData = [
-
 [0,1],
 [2,3],
 [0,2],
 [1,3],
 [0,3],
 [1,2]
-
 ];
+
+const sidebar = document.getElementById("sidebar-groups");
+
+Object.keys(groups).forEach(key=>{
+
+sidebar.innerHTML += `
+
+<div class="grupo-btn ${key==="A" ? "active" : ""}" 
+data-group="${key}" 
+onclick="loadGroup('${key}')">
+
+<div class="circle" style="background:${groups[key].color};">
+${key}
+</div>
+
+Grupo ${key}
+
+</div>
+
+`;
+
+});
+
+function loadGroup(groupKey){
+
+currentGroup = groupKey;
+
+document.querySelectorAll(".grupo-btn").forEach(btn=>{
+btn.classList.remove("active");
+});
+
+document.querySelector(`[data-group="${groupKey}"]`)
+.classList.add("active");
+
+document.querySelector(".group-title")
+.innerHTML = `Grupo ${groupKey}`;
+
+const teamsContainer = document.querySelector(".group-teams");
+
+teamsContainer.innerHTML = "";
+
+groups[groupKey].teams.forEach(team=>{
+
+teamsContainer.innerHTML += `
+
+<div class="team-chip">
+<img class="flag" src="${team[1]}">
+${team[0]}
+</div>
+
+`;
+
+});
 
 const matchesDiv = document.getElementById("matches");
 
+matchesDiv.innerHTML = "";
+
 matchesData.forEach((m,index)=>{
 
-    matchesDiv.innerHTML += `
+matchesDiv.innerHTML += `
 
-    <div class="match">
+<div class="match">
 
-        <div class="team">
-            <img class="flag" src="${teams[m[0]].flag}">
-            ${teams[m[0]].name}
-        </div>
+<div class="team">
+<img class="flag" src="${groups[groupKey].teams[m[0]][1]}">
+${groups[groupKey].teams[m[0]][0]}
+</div>
 
-        <div class="score-box">
+<div class="score-box">
 
-            <input type="number" min="0" id="a${index}">
-            <div class="vs">VS</div>
-            <input type="number" min="0" id="b${index}">
+<input type="number" min="0" id="a${index}">
+<div class="vs">VS</div>
+<input type="number" min="0" id="b${index}">
 
-        </div>
+</div>
 
-        <div class="team">
-            <img class="flag" src="${teams[m[1]].flag}">
-            ${teams[m[1]].name}
-        </div>
+<div class="team">
+<img class="flag" src="${groups[groupKey].teams[m[1]][1]}">
+${groups[groupKey].teams[m[1]][0]}
+</div>
 
-    </div>
+</div>
 
-    `;
+`;
 
 });
 
 document.querySelectorAll("input").forEach(input=>{
 
-    input.addEventListener("keyup",e=>{
+input.addEventListener("keyup",e=>{
 
-        if(e.key==="Enter"){
-            updateTable();
-        }
-
-    });
+if(e.key==="Enter"){
+updateTable();
+}
 
 });
 
-function updateTable(){
+});
 
-    let stats = {};
-
-    teams.forEach(t=>{
-
-        stats[t.name] = {
-            pts:0,
-            gf:0,
-            gc:0,
-            dg:0,
-            flag:t.flag
-        };
-
-    });
-
-    matchesData.forEach((m,index)=>{
-
-        let a = document.getElementById(`a${index}`).value;
-        let b = document.getElementById(`b${index}`).value;
-
-        if(a==="" || b==="") return;
-
-        a = parseInt(a);
-        b = parseInt(b);
-
-        const teamA = teams[m[0]].name;
-        const teamB = teams[m[1]].name;
-
-        stats[teamA].gf += a;
-        stats[teamA].gc += b;
-
-        stats[teamB].gf += b;
-        stats[teamB].gc += a;
-
-        if(a>b){
-
-            stats[teamA].pts += 3;
-
-        }
-
-        else if(b>a){
-
-            stats[teamB].pts += 3;
-
-        }
-
-        else{
-
-            stats[teamA].pts += 1;
-            stats[teamB].pts += 1;
-
-        }
-
-    });
-
-    Object.keys(stats).forEach(team=>{
-
-        stats[team].dg = stats[team].gf - stats[team].gc;
-
-    });
-
-    const sorted = Object.keys(stats).sort((a,b)=>{
-
-        if(stats[b].pts !== stats[a].pts)
-            return stats[b].pts - stats[a].pts;
-
-        if(stats[b].dg !== stats[a].dg)
-            return stats[b].dg - stats[a].dg;
-
-        return stats[b].gf - stats[a].gf;
-
-    });
-
-    const tbody = document.getElementById("tabla");
-
-    tbody.innerHTML = "";
-
-    sorted.forEach((team,index)=>{
-
-        tbody.innerHTML += `
-
-        <tr class="${index<2 ? 'qualify' : index===2 ? 'third' : ''}">
-
-            <td class="rank">${index+1}</td>
-
-            <td>
-
-                <div class="team-row">
-                    <img class="flag" src="${stats[team].flag}">
-                    ${team}
-                </div>
-
-            </td>
-
-            <td>${stats[team].pts}</td>
-            <td>${stats[team].gf}</td>
-            <td>${stats[team].gc}</td>
-            <td>${stats[team].dg}</td>
-
-        </tr>
-
-        `;
-
-    });
-
-    document.getElementById("first").innerHTML = sorted[0];
-    document.getElementById("second").innerHTML = sorted[1];
-    document.getElementById("third").innerHTML = sorted[2];
+updateTable();
 
 }
 
-updateTable();
+function updateTable(){
+
+let stats = {};
+
+groups[currentGroup].teams.forEach(t=>{
+
+stats[t[0]] = {
+pts:0,
+gf:0,
+gc:0,
+dg:0,
+flag:t[1]
+};
+
+});
+
+matchesData.forEach((m,index)=>{
+
+let a = document.getElementById(`a${index}`).value;
+let b = document.getElementById(`b${index}`).value;
+
+if(a==="" || b==="") return;
+
+a = parseInt(a);
+b = parseInt(b);
+
+const teamA = groups[currentGroup].teams[m[0]][0];
+const teamB = groups[currentGroup].teams[m[1]][0];
+
+stats[teamA].gf += a;
+stats[teamA].gc += b;
+
+stats[teamB].gf += b;
+stats[teamB].gc += a;
+
+if(a>b){
+
+stats[teamA].pts += 3;
+
+}
+
+else if(b>a){
+
+stats[teamB].pts += 3;
+
+}
+
+else{
+
+stats[teamA].pts += 1;
+stats[teamB].pts += 1;
+
+}
+
+});
+
+Object.keys(stats).forEach(team=>{
+
+stats[team].dg = stats[team].gf - stats[team].gc;
+
+});
+
+const sorted = Object.keys(stats).sort((a,b)=>{
+
+if(stats[b].pts !== stats[a].pts)
+return stats[b].pts - stats[a].pts;
+
+if(stats[b].dg !== stats[a].dg)
+return stats[b].dg - stats[a].dg;
+
+return stats[b].gf - stats[a].gf;
+
+});
+
+const tbody = document.getElementById("tabla");
+
+tbody.innerHTML = "";
+
+sorted.forEach((team,index)=>{
+
+tbody.innerHTML += `
+
+<tr class="${index<2 ? 'qualify' : index===2 ? 'third' : ''}">
+
+<td class="rank">${index+1}</td>
+
+<td>
+
+<div class="team-row">
+<img class="flag" src="${stats[team].flag}">
+${team}
+</div>
+
+</td>
+
+<td>${stats[team].pts}</td>
+<td>${stats[team].gf}</td>
+<td>${stats[team].gc}</td>
+<td>${stats[team].dg}</td>
+
+</tr>
+
+`;
+
+});
+
+document.getElementById("first").innerHTML = sorted[0];
+document.getElementById("second").innerHTML = sorted[1];
+document.getElementById("third").innerHTML = sorted[2];
+
+}
+
+loadGroup("A");
 
 </script>
 
