@@ -116,6 +116,7 @@ color:white;
 .content{
 flex:1;
 padding:35px;
+overflow-x:auto;
 }
 
 .panel{
@@ -280,35 +281,77 @@ color:#5cff7f;
 color:#6aa7ff;
 }
 
-.knockout-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:20px;
-margin-top:20px;
+.bracket-container{
+margin-top:60px;
+display:flex;
+justify-content:center;
+align-items:flex-start;
+gap:25px;
+overflow-x:auto;
+padding-bottom:50px;
 }
 
-.knockout-match{
+.round{
+display:flex;
+flex-direction:column;
+gap:20px;
+min-width:220px;
+}
+
+.round h2{
+text-align:center;
+margin-bottom:10px;
+color:#999;
+}
+
+.bracket-match{
 background:#111b35;
-border-radius:16px;
-padding:18px;
+border-radius:14px;
+padding:12px;
 border:1px solid rgba(255,255,255,.06);
 }
 
-.knockout-title{
-margin-bottom:15px;
-font-size:1rem;
-color:#5cff7f;
-font-weight:600;
-}
-
-.knockout-team{
-display:flex;
-align-items:center;
-justify-content:space-between;
-margin-bottom:12px;
+.bracket-team{
 background:#0a1227;
 padding:10px;
 border-radius:10px;
+margin-bottom:8px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.bracket-score{
+width:45px;
+height:35px;
+background:#091127;
+border:none;
+border-radius:8px;
+color:white;
+text-align:center;
+}
+
+.finals{
+display:flex;
+flex-direction:column;
+justify-content:center;
+gap:50px;
+margin-top:120px;
+}
+
+.final-box,
+.third-box{
+background:#111b35;
+padding:20px;
+border-radius:18px;
+min-width:240px;
+}
+
+.final-title{
+text-align:center;
+margin-bottom:15px;
+font-weight:700;
+color:#5cff7f;
 }
 
 .footer{
@@ -320,25 +363,6 @@ opacity:.7;
 @media(max-width:1200px){
 
 .grid{
-grid-template-columns:1fr;
-}
-
-}
-
-@media(max-width:900px){
-
-.main{
-flex-direction:column;
-}
-
-.sidebar{
-width:100%;
-height:auto;
-border-right:none;
-border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-.classified{
 grid-template-columns:1fr;
 }
 
@@ -441,32 +465,54 @@ grid-template-columns:1fr;
 
 </div>
 
-<div style="margin-top:60px;">
+<div class="bracket-container">
 
-<div class="section-title">
-🏆 FASE FINAL
+<div class="round">
+<h2>R32</h2>
+<div id="r32-left"></div>
 </div>
 
-<div class="table-card">
+<div class="round">
+<h2>R16</h2>
+<div id="r16-left"></div>
+</div>
 
-<h2>Dieciseisavos</h2>
-<div id="dieciseisavos" class="knockout-grid"></div>
+<div class="round">
+<h2>QF</h2>
+<div id="qf-left"></div>
+</div>
 
-<h2 style="margin-top:40px;">Octavos</h2>
-<div id="octavos" class="knockout-grid"></div>
+<div class="round">
+<h2>SF</h2>
+<div id="sf-left"></div>
+</div>
 
-<h2 style="margin-top:40px;">Cuartos</h2>
-<div id="cuartos" class="knockout-grid"></div>
+<div class="finals">
 
-<h2 style="margin-top:40px;">Semifinales</h2>
-<div id="semis" class="knockout-grid"></div>
+<div id="final-box"></div>
 
-<h2 style="margin-top:40px;">Tercer Puesto</h2>
-<div id="tercer" class="knockout-grid"></div>
+<div id="third-box"></div>
 
-<h2 style="margin-top:40px;">Final</h2>
-<div id="final" class="knockout-grid"></div>
+</div>
 
+<div class="round">
+<h2>SF</h2>
+<div id="sf-right"></div>
+</div>
+
+<div class="round">
+<h2>QF</h2>
+<div id="qf-right"></div>
+</div>
+
+<div class="round">
+<h2>R16</h2>
+<div id="r16-right"></div>
+</div>
+
+<div class="round">
+<h2>R32</h2>
+<div id="r32-right"></div>
 </div>
 
 </div>
@@ -485,125 +531,89 @@ Mundial 2026 — Hecho para los fanáticos del fútbol ❤️
 
 const groups = {
 
-A:{
-color:"#26a65b",
-teams:[
+A:{color:"#26a65b",teams:[
 ["México","https://flagcdn.com/w40/mx.png"],
 ["Sudáfrica","https://flagcdn.com/w40/za.png"],
 ["Corea del Sur","https://flagcdn.com/w40/kr.png"],
 ["República Checa","https://flagcdn.com/w40/cz.png"]
-]
-},
+]},
 
-B:{
-color:"#e74c3c",
-teams:[
+B:{color:"#e74c3c",teams:[
 ["Canadá","https://flagcdn.com/w40/ca.png"],
 ["Bosnia","https://flagcdn.com/w40/ba.png"],
 ["Qatar","https://flagcdn.com/w40/qa.png"],
 ["Suiza","https://flagcdn.com/w40/ch.png"]
-]
-},
+]},
 
-C:{
-color:"#f39c12",
-teams:[
+C:{color:"#f39c12",teams:[
 ["Brasil","https://flagcdn.com/w40/br.png"],
 ["Marruecos","https://flagcdn.com/w40/ma.png"],
 ["Haití","https://flagcdn.com/w40/ht.png"],
 ["Escocia","https://flagcdn.com/w40/gb-sct.png"]
-]
-},
+]},
 
-D:{
-color:"#c0392b",
-teams:[
+D:{color:"#c0392b",teams:[
 ["Estados Unidos","https://flagcdn.com/w40/us.png"],
 ["Paraguay","https://flagcdn.com/w40/py.png"],
 ["Australia","https://flagcdn.com/w40/au.png"],
 ["Turquía","https://flagcdn.com/w40/tr.png"]
-]
-},
+]},
 
-E:{
-color:"#27ae60",
-teams:[
+E:{color:"#27ae60",teams:[
 ["Alemania","https://flagcdn.com/w40/de.png"],
 ["Curazao","https://flagcdn.com/w40/cw.png"],
 ["Costa de Marfil","https://flagcdn.com/w40/ci.png"],
 ["Ecuador","https://flagcdn.com/w40/ec.png"]
-]
-},
+]},
 
-F:{
-color:"#2e86de",
-teams:[
+F:{color:"#2e86de",teams:[
 ["Países Bajos","https://flagcdn.com/w40/nl.png"],
 ["Japón","https://flagcdn.com/w40/jp.png"],
 ["Suecia","https://flagcdn.com/w40/se.png"],
 ["Túnez","https://flagcdn.com/w40/tn.png"]
-]
-},
+]},
 
-G:{
-color:"#f1c40f",
-teams:[
+G:{color:"#f1c40f",teams:[
 ["Bélgica","https://flagcdn.com/w40/be.png"],
 ["Egipto","https://flagcdn.com/w40/eg.png"],
 ["Irlanda","https://flagcdn.com/w40/ie.png"],
 ["Venezuela","https://flagcdn.com/w40/ve.png"]
-]
-},
+]},
 
-H:{
-color:"#ff0033",
-teams:[
+H:{color:"#ff0033",teams:[
 ["España","https://flagcdn.com/w40/es.png"],
 ["Uruguay","https://flagcdn.com/w40/uy.png"],
 ["Arabia Saudita","https://flagcdn.com/w40/sa.png"],
 ["Cabo Verde","https://flagcdn.com/w40/cv.png"]
-]
-},
+]},
 
-I:{
-color:"#6c5ce7",
-teams:[
+I:{color:"#6c5ce7",teams:[
 ["Francia","https://flagcdn.com/w40/fr.png"],
 ["Irak","https://flagcdn.com/w40/iq.png"],
 ["Dinamarca","https://flagcdn.com/w40/dk.png"],
 ["Camerún","https://flagcdn.com/w40/cm.png"]
-]
-},
+]},
 
-J:{
-color:"#0984e3",
-teams:[
+J:{color:"#0984e3",teams:[
 ["Argentina","https://flagcdn.com/w40/ar.png"],
 ["Austria","https://flagcdn.com/w40/at.png"],
 ["Jordania","https://flagcdn.com/w40/jo.png"],
 ["Nigeria","https://flagcdn.com/w40/ng.png"]
-]
-},
+]},
 
-K:{
-color:"#6c5ce7",
-teams:[
+K:{color:"#6c5ce7",teams:[
 ["Italia","https://flagcdn.com/w40/it.png"],
 ["Colombia","https://flagcdn.com/w40/co.png"],
 ["Noruega","https://flagcdn.com/w40/no.png"],
 ["Nueva Zelanda","https://flagcdn.com/w40/nz.png"]
-]
-},
+]},
 
-L:{
-color:"#e67e22",
-teams:[
+L:{color:"#e67e22",teams:[
 ["Inglaterra","https://flagcdn.com/w40/gb-eng.png"],
 ["Croacia","https://flagcdn.com/w40/hr.png"],
 ["Ghana","https://flagcdn.com/w40/gh.png"],
 ["Panamá","https://flagcdn.com/w40/pa.png"]
-]
-}
+]}
 
 };
 
@@ -618,11 +628,9 @@ const matchesData = [
 
 let currentGroup = "A";
 
-const sidebar = document.getElementById("sidebar-groups");
-
 Object.keys(groups).forEach(key=>{
 
-sidebar.innerHTML += `
+document.getElementById("sidebar-groups").innerHTML += `
 
 <div class="grupo-btn ${key==="A" ? "active" : ""}" onclick="loadGroup('${key}')" data-group="${key}">
 
@@ -649,8 +657,7 @@ btn.classList.remove("active");
 document.querySelector(`[data-group="${groupKey}"]`)
 .classList.add("active");
 
-document.querySelector(".group-title")
-.innerHTML = `Grupo ${groupKey}`;
+document.querySelector(".group-title").innerHTML = `Grupo ${groupKey}`;
 
 const teamsContainer = document.querySelector(".group-teams");
 
@@ -776,9 +783,7 @@ stats[teamB].pts += 1;
 });
 
 Object.keys(stats).forEach(team=>{
-
 stats[team].dg = stats[team].gf - stats[team].gc;
-
 });
 
 const sorted = Object.keys(stats).sort((a,b)=>{
@@ -831,86 +836,104 @@ document.getElementById("third").innerHTML = sorted[2];
 
 }
 
-function createKnockout(id,title,count){
+function createBracket(){
 
-const container = document.getElementById(id);
+const left = document.getElementById("r32-left");
+const right = document.getElementById("r32-right");
 
-for(let i=1;i<=count;i++){
+for(let i=1;i<=8;i++){
 
-container.innerHTML += `
-
-<div class="knockout-match">
-
-<div class="knockout-title">
-${title} ${i}
-</div>
-
-<div class="knockout-team">
-<div>Equipo 1</div>
-<input type="number" class="knockout-score">
-</div>
-
-<div class="knockout-team">
-<div>Equipo 2</div>
-<input type="number" class="knockout-score">
-</div>
-
-</div>
-
-`;
+left.innerHTML += bracketMatch(`M${70+i}`);
+right.innerHTML += bracketMatch(`M${80+i}`);
 
 }
 
-}
+createRound("r16-left",4);
+createRound("qf-left",2);
+createRound("sf-left",1);
 
-createKnockout("dieciseisavos","Partido",8);
-createKnockout("octavos","Octavo",8);
-createKnockout("cuartos","Cuarto",4);
-createKnockout("semis","Semifinal",2);
+createRound("r16-right",4);
+createRound("qf-right",2);
+createRound("sf-right",1);
 
-document.getElementById("tercer").innerHTML = `
+document.getElementById("final-box").innerHTML = `
 
-<div class="knockout-match">
+<div class="final-box">
 
-<div class="knockout-title">
-🥉 Tercer Puesto
-</div>
-
-<div class="knockout-team">
-<div>Semifinalista 1</div>
-<input type="number" class="knockout-score">
-</div>
-
-<div class="knockout-team">
-<div>Semifinalista 2</div>
-<input type="number" class="knockout-score">
-</div>
-
-</div>
-
-`;
-
-document.getElementById("final").innerHTML = `
-
-<div class="knockout-match">
-
-<div class="knockout-title">
+<div class="final-title">
 🏆 FINAL
 </div>
 
-<div class="knockout-team">
-<div>Finalista 1</div>
-<input type="number" class="knockout-score">
-</div>
-
-<div class="knockout-team">
-<div>Finalista 2</div>
-<input type="number" class="knockout-score">
-</div>
+${teamLine("Ganador SF1")}
+${teamLine("Ganador SF2")}
 
 </div>
 
 `;
+
+document.getElementById("third-box").innerHTML = `
+
+<div class="third-box">
+
+<div class="final-title">
+🥉 TERCER PUESTO
+</div>
+
+${teamLine("Perdedor SF1")}
+${teamLine("Perdedor SF2")}
+
+</div>
+
+`;
+
+}
+
+function createRound(id,count){
+
+for(let i=0;i<count;i++){
+
+document.getElementById(id).innerHTML += bracketMatch("MATCH");
+
+}
+
+}
+
+function bracketMatch(title){
+
+return `
+
+<div class="bracket-match">
+
+<div class="final-title">
+${title}
+</div>
+
+${teamLine("Equipo 1")}
+${teamLine("Equipo 2")}
+
+</div>
+
+`;
+
+}
+
+function teamLine(name){
+
+return `
+
+<div class="bracket-team">
+
+<div>${name}</div>
+
+<input class="bracket-score" type="number">
+
+</div>
+
+`;
+
+}
+
+createBracket();
 
 loadGroup("A");
 
