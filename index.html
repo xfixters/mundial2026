@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mundial 2026 Tracker</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .grupo {
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 30px;
+      background: #1c1c1c;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      border: 1px solid #444;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background: #222;
+    }
+
+    input {
+      width: 50px;
+      text-align: center;
+      padding: 5px;
+    }
+
+    .partido {
+      margin-bottom: 10px;
+    }
+
+    .clasificados {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #00ff88;
+    }
+
+    .terceros {
+      margin-top: 40px;
+      padding: 20px;
+      border-radius: 10px;
+      background: #1a1a1a;
+    }
+
+    .fase-final {
+      margin-top: 40px;
+      padding: 20px;
+      background: #191919;
+      border-radius: 10px;
+    }
+
+    button {
+      background: #00aa66;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: #00cc77;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Mundial 2026</h1>
+
+<div id="contenedor-grupos"></div>
+
+<div class="terceros">
+  <h2>Mejores terceros</h2>
+  <div id="mejores-terceros"></div>
+</div>
+
+<div class="fase-final">
+  <h2>Clasificados a dieciseisavos</h2>
+  <div id="clasificados-finales"></div>
+</div>
+
+<script>
+
+const grupos = {
+  A: ["México", "Sudáfrica", "Corea del Sur", "República Checa"],
+  B: ["Canadá", "Bosnia", "Qatar", "Suiza"],
+  C: ["Brasil", "Marruecos", "Haití", "Escocia"],
+  D: ["Estados Unidos", "Paraguay", "Australia", "Turquía"],
+  E: ["Alemania", "Curazao", "Costa de Marfil", "Ecuador"],
+  F: ["Países Bajos", "Japón", "Suecia", "Túnez"],
+  G: ["Bélgica", "Egipto", "Irlanda", "Venezuela"],
+  H: ["España", "Uruguay", "Arabia Saudita", "Cabo Verde"],
+  I: ["Francia", "Irak", "Dinamarca", "Camerún"],
+  J: ["Argentina", "Austria", "Jordania", "Nigeria"],
+  K: ["Italia", "Colombia", "Noruega", "Nueva Zelanda"],
+  L: ["Inglaterra", "Croacia", "Ghana", "Panamá"]
+};
+
+const contenedor = document.getElementById("contenedor-grupos");
+
+function crearGrupo(nombre, equipos) {
+
+  const div = document.createElement("div");
+  div.className = "grupo";
+
+  let partidosHTML = "";
+
+  const partidos = [
+    [0,1],
+    [2,3],
+    [0,2],
+    [1,3],
+    [0,3],
+    [1,2]
+  ];
+
+  partidos.forEach((p, index) => {
+    partidosHTML += `
+      <div class="partido">
+        ${equipos[p[0]]}
+        <input type="number" min="0" value="" id="${nombre}-${index}-a">
+        vs
+        <input type="number" min="0" value="" id="${nombre}-${index}-b">
+        ${equipos[p[1]]}
+      </div>
+    `;
+  });
+
+  div.innerHTML = `
+    <h2>Grupo ${nombre}</h2>
+
+    ${partidosHTML}
+
+    <button onclick="actualizarGrupo('${nombre}')">
+      Actualizar tabla
+    </button>
+
+    <table id="tabla-${nombre}">
+      <thead>
+        <tr>
+          <th>Equipo</th>
+          <th>PTS</th>
+          <th>GF</th>
+          <th>GC</th>
+          <th>DG</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div class="clasificados" id="clasificados-${nombre}"></div>
+  `;
+
+  contenedor.appendChild(div);
+
+  actualizarGrupo(nombre);
+}
+
+function actualizarGrupo(nombre) {
+
+  const equipos = grupos[nombre];
+
+  const stats = {};
+
+  equipos.forEach(eq => {
+    stats[eq] = {
+      pts: 0,
+      gf: 0,
+      gc: 0,
+      dg: 0
+    };
+  });
+
+  const partidos = [
+    [0,1],
+    [2,3],
+    [0,2],
+    [1,3],
+    [0,3],
+    [1,2]
+  ];
+
+  partidos.forEach((p, index) => {
+
+    const a = document.getElementById(`${nombre}-${index}-a`).value;
+    const b = document.getElementById(`${nombre}-${index}-b`).value;
+
+    if(a === "" || b === "") return;
+
+    const ga = parseInt(a);
+    const gb = parseInt(b);
+
+    const eqA = equipos[p[0]];
+    const eqB = equipos[p[1]];
+
+    stats[eqA].gf += ga;
+    stats[eqA].gc += gb;
+
+    stats[eqB].gf += gb;
+    stats[eqB].gc += ga;
+
+    if(ga > gb) {
+      stats[eqA].pts += 3;
+    }
+    else if(gb > ga) {
+      stats[eqB].pts += 3;
+    }
+    else {
+      stats[eqA].pts += 1;
+      stats[eqB].pts += 1;
+    }
+  });
+
+  equipos.forEach(eq => {
+    stats[eq].dg = stats[eq].gf - stats[eq].gc;
+  });
+
+  const ordenados = [...equipos].sort((a,b) => {
+
+    if(stats[b].pts !== stats[a].pts)
+      return stats[b].pts - stats[a].pts;
+
+    if(stats[b].dg !== stats[a].dg)
+      return stats[b].dg - stats[a].dg;
+
+    return stats[b].gf - stats[a].gf;
+  });
+
+  const tbody = document.querySelector(`#tabla-${nombre} tbody`);
+
+  tbody.innerHTML = "";
+
+  ordenados.forEach(eq => {
+
+    const fila = document.createElement("tr");
+
+    fila.innerHTML = `
+      <td>${eq}</td>
+      <td>${stats[eq].pts}</td>
+      <td>${stats[eq].gf}</td>
+      <td>${stats[eq].gc}</td>
+      <td>${stats[eq].dg}</td>
+    `;
+
+    tbody.appendChild(fila);
+  });
+
+  document.getElementById(`clasificados-${nombre}`).innerHTML = `
+    Clasificados directos: <br>
+    1° ${ordenados[0]}<br>
+    2° ${ordenados[1]}<br>
+    3° ${ordenados[2]}
+  `;
+
+  actualizarMejoresTerceros();
+}
+
+function actualizarMejoresTerceros() {
+
+  const terceros = [];
+
+  Object.keys(grupos).forEach(nombre => {
+
+    const tabla = [];
+
+    const filas = document.querySelectorAll(`#tabla-${nombre} tbody tr`);
+
+    filas.forEach(f => {
+      tabla.push({
+        equipo: f.children[0].innerText,
+        pts: parseInt(f.children[1].innerText),
+        gf: parseInt(f.children[2].innerText),
+        gc: parseInt(f.children[3].innerText),
+        dg: parseInt(f.children[4].innerText)
+      });
+    });
+
+    if(tabla.length === 4)
+      terceros.push(tabla[2]);
+  });
+
+  terceros.sort((a,b) => {
+
+    if(b.pts !== a.pts)
+      return b.pts - a.pts;
+
+    if(b.dg !== a.dg)
+      return b.dg - a.dg;
+
+    return b.gf - a.gf;
+  });
+
+  const mejores8 = terceros.slice(0,8);
+
+  const div = document.getElementById("mejores-terceros");
+
+  div.innerHTML = "";
+
+  mejores8.forEach((t,index) => {
+    div.innerHTML += `
+      ${index+1}. ${t.equipo} (${t.pts} pts)<br>
+    `;
+  });
+
+  actualizarClasificados(mejores8);
+}
+
+function actualizarClasificados(mejores8) {
+
+  const clasificados = [];
+
+  Object.keys(grupos).forEach(nombre => {
+
+    const filas = document.querySelectorAll(`#tabla-${nombre} tbody tr`);
+
+    if(filas.length >= 2) {
+      clasificados.push(filas[0].children[0].innerText);
+      clasificados.push(filas[1].children[0].innerText);
+    }
+  });
+
+  mejores8.forEach(t => {
+    clasificados.push(t.equipo);
+  });
+
+  const div = document.getElementById("clasificados-finales");
+
+  div.innerHTML = "";
+
+  clasificados.forEach((c,index) => {
+    div.innerHTML += `${index+1}. ${c}<br>`;
+  });
+}
+
+Object.keys(grupos).forEach(g => {
+  crearGrupo(g, grupos[g]);
+});
+
+</script>
+
+</body>
+</html>
