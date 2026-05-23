@@ -1,557 +1,799 @@
-const STORAGE_KEY = "mundial_2026_app_v2";
+const STORAGE_KEY = "mundial_2026_full";
 
 const groups = {
-  A: { color: "#26a65b", teams: [["México","https://flagcdn.com/w40/mx.png"],["Sudáfrica","https://flagcdn.com/w40/za.png"],["Corea del Sur","https://flagcdn.com/w40/kr.png"],["República Checa","https://flagcdn.com/w40/cz.png"]] },
-  B: { color: "#e74c3c", teams: [["Canadá","https://flagcdn.com/w40/ca.png"],["Bosnia y Herzegovina","https://flagcdn.com/w40/ba.png"],["Qatar","https://flagcdn.com/w40/qa.png"],["Suiza","https://flagcdn.com/w40/ch.png"]] },
-  C: { color: "#f39c12", teams: [["Brasil","https://flagcdn.com/w40/br.png"],["Marruecos","https://flagcdn.com/w40/ma.png"],["Haití","https://flagcdn.com/w40/ht.png"],["Escocia","https://flagcdn.com/w40/gb-sct.png"]] },
-  D: { color: "#c0392b", teams: [["Estados Unidos","https://flagcdn.com/w40/us.png"],["Paraguay","https://flagcdn.com/w40/py.png"],["Australia","https://flagcdn.com/w40/au.png"],["Turquía","https://flagcdn.com/w40/tr.png"]] },
-  E: { color: "#27ae60", teams: [["Alemania","https://flagcdn.com/w40/de.png"],["Curazao","https://flagcdn.com/w40/cw.png"],["Costa de Marfil","https://flagcdn.com/w40/ci.png"],["Ecuador","https://flagcdn.com/w40/ec.png"]] },
-  F: { color: "#2e86de", teams: [["Países Bajos","https://flagcdn.com/w40/nl.png"],["Japón","https://flagcdn.com/w40/jp.png"],["Suecia","https://flagcdn.com/w40/se.png"],["Túnez","https://flagcdn.com/w40/tn.png"]] },
-  G: { color: "#f1c40f", teams: [["Bélgica","https://flagcdn.com/w40/be.png"],["Egipto","https://flagcdn.com/w40/eg.png"],["Irlanda","https://flagcdn.com/w40/ie.png"],["Venezuela","https://flagcdn.com/w40/ve.png"]] },
-  H: { color: "#ff0033", teams: [["España","https://flagcdn.com/w40/es.png"],["Uruguay","https://flagcdn.com/w40/uy.png"],["Arabia Saudita","https://flagcdn.com/w40/sa.png"],["Cabo Verde","https://flagcdn.com/w40/cv.png"]] },
-  I: { color: "#6c5ce7", teams: [["Francia","https://flagcdn.com/w40/fr.png"],["Irak","https://flagcdn.com/w40/iq.png"],["Dinamarca","https://flagcdn.com/w40/dk.png"],["Camerún","https://flagcdn.com/w40/cm.png"]] },
-  J: { color: "#0984e3", teams: [["Argentina","https://flagcdn.com/w40/ar.png"],["Austria","https://flagcdn.com/w40/at.png"],["Jordania","https://flagcdn.com/w40/jo.png"],["Nigeria","https://flagcdn.com/w40/ng.png"]] },
-  K: { color: "#8e44ad", teams: [["Italia","https://flagcdn.com/w40/it.png"],["Colombia","https://flagcdn.com/w40/co.png"],["Noruega","https://flagcdn.com/w40/no.png"],["Nueva Zelanda","https://flagcdn.com/w40/nz.png"]] },
-  L: { color: "#e67e22", teams: [["Inglaterra","https://flagcdn.com/w40/gb-eng.png"],["Croacia","https://flagcdn.com/w40/hr.png"],["Ghana","https://flagcdn.com/w40/gh.png"],["Panamá","https://flagcdn.com/w40/pa.png"]] }
+
+A:{
+color:"#26a65b",
+teams:[
+["México","https://flagcdn.com/w40/mx.png"],
+["Sudáfrica","https://flagcdn.com/w40/za.png"],
+["Corea del Sur","https://flagcdn.com/w40/kr.png"],
+["República Checa","https://flagcdn.com/w40/cz.png"]
+]
+},
+
+B:{
+color:"#e74c3c",
+teams:[
+["Canadá","https://flagcdn.com/w40/ca.png"],
+["Bosnia","https://flagcdn.com/w40/ba.png"],
+["Qatar","https://flagcdn.com/w40/qa.png"],
+["Suiza","https://flagcdn.com/w40/ch.png"]
+]
+},
+
+C:{
+color:"#f39c12",
+teams:[
+["Brasil","https://flagcdn.com/w40/br.png"],
+["Marruecos","https://flagcdn.com/w40/ma.png"],
+["Haití","https://flagcdn.com/w40/ht.png"],
+["Escocia","https://flagcdn.com/w40/gb-sct.png"]
+]
+},
+
+D:{
+color:"#c0392b",
+teams:[
+["Estados Unidos","https://flagcdn.com/w40/us.png"],
+["Paraguay","https://flagcdn.com/w40/py.png"],
+["Australia","https://flagcdn.com/w40/au.png"],
+["Turquía","https://flagcdn.com/w40/tr.png"]
+]
+},
+
+E:{
+color:"#27ae60",
+teams:[
+["Alemania","https://flagcdn.com/w40/de.png"],
+["Curazao","https://flagcdn.com/w40/cw.png"],
+["Costa de Marfil","https://flagcdn.com/w40/ci.png"],
+["Ecuador","https://flagcdn.com/w40/ec.png"]
+]
+},
+
+F:{
+color:"#2e86de",
+teams:[
+["Países Bajos","https://flagcdn.com/w40/nl.png"],
+["Japón","https://flagcdn.com/w40/jp.png"],
+["Suecia","https://flagcdn.com/w40/se.png"],
+["Túnez","https://flagcdn.com/w40/tn.png"]
+]
+},
+
+G:{
+color:"#f1c40f",
+teams:[
+["Bélgica","https://flagcdn.com/w40/be.png"],
+["Egipto","https://flagcdn.com/w40/eg.png"],
+["Irlanda","https://flagcdn.com/w40/ie.png"],
+["Venezuela","https://flagcdn.com/w40/ve.png"]
+]
+},
+
+H:{
+color:"#ff0033",
+teams:[
+["España","https://flagcdn.com/w40/es.png"],
+["Uruguay","https://flagcdn.com/w40/uy.png"],
+["Arabia Saudita","https://flagcdn.com/w40/sa.png"],
+["Cabo Verde","https://flagcdn.com/w40/cv.png"]
+]
+},
+
+I:{
+color:"#6c5ce7",
+teams:[
+["Francia","https://flagcdn.com/w40/fr.png"],
+["Irak","https://flagcdn.com/w40/iq.png"],
+["Dinamarca","https://flagcdn.com/w40/dk.png"],
+["Camerún","https://flagcdn.com/w40/cm.png"]
+]
+},
+
+J:{
+color:"#0984e3",
+teams:[
+["Argentina","https://flagcdn.com/w40/ar.png"],
+["Austria","https://flagcdn.com/w40/at.png"],
+["Jordania","https://flagcdn.com/w40/jo.png"],
+["Nigeria","https://flagcdn.com/w40/ng.png"]
+]
+},
+
+K:{
+color:"#8e44ad",
+teams:[
+["Italia","https://flagcdn.com/w40/it.png"],
+["Colombia","https://flagcdn.com/w40/co.png"],
+["Noruega","https://flagcdn.com/w40/no.png"],
+["Nueva Zelanda","https://flagcdn.com/w40/nz.png"]
+]
+},
+
+L:{
+color:"#e67e22",
+teams:[
+["Inglaterra","https://flagcdn.com/w40/gb-eng.png"],
+["Croacia","https://flagcdn.com/w40/hr.png"],
+["Ghana","https://flagcdn.com/w40/gh.png"],
+["Panamá","https://flagcdn.com/w40/pa.png"]
+]
+}
+
 };
 
 const schedule = [
-  [0,1],
-  [2,3],
-  [0,2],
-  [1,3],
-  [0,3],
-  [1,2]
+[0,1],
+[2,3],
+[0,2],
+[1,3],
+[0,3],
+[1,2]
 ];
 
-const knockoutTemplate = {
-  r32: Array.from({ length: 16 }, () => ({ s1: "", s2: "" })),
-  r16: Array.from({ length: 8 }, () => ({ s1: "", s2: "" })),
-  qf: Array.from({ length: 4 }, () => ({ s1: "", s2: "" })),
-  sf: Array.from({ length: 2 }, () => ({ s1: "", s2: "" })),
-  third: { s1: "", s2: "" },
-  final: { s1: "", s2: "" }
-};
+let currentGroup = "A";
 
 const state = loadState();
 
-let currentGroup = state.currentGroup || "A";
 let allStandings = {};
 
-function defaultGroupScores() {
-  const obj = {};
-  Object.keys(groups).forEach(g => {
-    obj[g] = schedule.map(() => ["", ""]);
-  });
-  return obj;
+function loadState(){
+
+const saved = localStorage.getItem(STORAGE_KEY);
+
+if(saved){
+
+return JSON.parse(saved);
+
 }
 
-function loadState() {
-  const raw = localStorage.getItem(STORAGE_KEY);
-  if (!raw) {
-    return {
-      currentGroup: "A",
-      groupScores: defaultGroupScores(),
-      knockout: structuredClone(knockoutTemplate)
-    };
-  }
+const data = {
+groups:{}
+};
 
-  try {
-    const parsed = JSON.parse(raw);
-    return {
-      currentGroup: parsed.currentGroup || "A",
-      groupScores: parsed.groupScores || defaultGroupScores(),
-      knockout: parsed.knockout || structuredClone(knockoutTemplate)
-    };
-  } catch {
-    return {
-      currentGroup: "A",
-      groupScores: defaultGroupScores(),
-      knockout: structuredClone(knockoutTemplate)
-    };
-  }
+Object.keys(groups).forEach(group=>{
+
+data.groups[group] = [];
+
+for(let i=0;i<6;i++){
+
+data.groups[group].push(["",""]);
+
 }
 
-function saveState() {
-  state.currentGroup = currentGroup;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+});
+
+return data;
+
 }
 
-function teamLookup(name) {
-  for (const key of Object.keys(groups)) {
-    const found = groups[key].teams.find(t => t[0] === name);
-    if (found) return found;
-  }
-  return [name, ""];
+function saveState(){
+
+localStorage.setItem(
+STORAGE_KEY,
+JSON.stringify(state)
+);
+
 }
 
-function renderGroupMenu() {
-  const menu = document.getElementById("groups-menu");
-  menu.innerHTML = "";
+function createSidebar(){
 
-  Object.keys(groups).forEach(letter => {
-    menu.innerHTML += `
-      <div class="group-btn ${letter === currentGroup ? "active" : ""}" data-group="${letter}" onclick="loadGroup('${letter}')">
-        <div class="group-circle" style="background:${groups[letter].color}">${letter}</div>
-        Grupo ${letter}
-      </div>
-    `;
-  });
+const menu =
+document.getElementById("groups-menu");
+
+menu.innerHTML = "";
+
+Object.keys(groups).forEach(letter=>{
+
+menu.innerHTML += `
+
+<div
+class="group-btn
+${letter===currentGroup ? "active" : ""}"
+
+onclick="loadGroup('${letter}')"
+
+data-group="${letter}">
+
+<div
+class="group-circle"
+style="background:${groups[letter].color};">
+
+${letter}
+
+</div>
+
+Grupo ${letter}
+
+</div>
+
+`;
+
+});
+
 }
 
-function loadGroup(letter) {
-  currentGroup = letter;
-  renderGroupMenu();
-  renderGroup(letter);
-  updateAll();
-  saveState();
+function loadGroup(letter){
+
+currentGroup = letter;
+
+createSidebar();
+
+renderGroup();
+
+updateAll();
+
 }
 
-function renderGroup(letter) {
-  const group = groups[letter];
-  document.getElementById("group-title").textContent = `Grupo ${letter}`;
+function renderGroup(){
 
-  const teamsDiv = document.getElementById("group-teams");
-  teamsDiv.innerHTML = "";
-  group.teams.forEach(team => {
-    teamsDiv.innerHTML += `
-      <div class="team-chip">
-        <img class="flag" src="${team[1]}" alt="${team[0]}">
-        ${team[0]}
-      </div>
-    `;
-  });
+const group =
+groups[currentGroup];
 
-  const matchesDiv = document.getElementById("matches");
-  matchesDiv.innerHTML = "";
+document.getElementById("group-title")
+.innerHTML = `Grupo ${currentGroup}`;
 
-  schedule.forEach((pair, i) => {
-    const t1 = group.teams[pair[0]];
-    const t2 = group.teams[pair[1]];
-    const saved = state.groupScores[letter]?.[i] || ["", ""];
+const teamsDiv =
+document.getElementById("group-teams");
 
-    matchesDiv.innerHTML += `
-      <div class="match">
-        <div class="team">
-          <img class="flag" src="${t1[1]}" alt="${t1[0]}">
-          ${t1[0]}
-        </div>
+teamsDiv.innerHTML = "";
 
-        <div class="score-box">
-          <input
-            class="match-input"
-            type="number"
-            min="0"
-            inputmode="numeric"
-            data-group="${letter}"
-            data-match="${i}"
-            data-side="0"
-            value="${saved[0]}"
-          >
-          <div class="vs">VS</div>
-          <input
-            class="match-input"
-            type="number"
-            min="0"
-            inputmode="numeric"
-            data-group="${letter}"
-            data-match="${i}"
-            data-side="1"
-            value="${saved[1]}"
-          >
-        </div>
+group.teams.forEach(team=>{
 
-        <div class="team">
-          <img class="flag" src="${t2[1]}" alt="${t2[0]}">
-          ${t2[0]}
-        </div>
-      </div>
-    `;
-  });
+teamsDiv.innerHTML += `
 
-  attachInputEvents();
+<div class="team-chip">
+
+<img
+class="flag"
+src="${team[1]}">
+
+${team[0]}
+
+</div>
+
+`;
+
+});
+
+renderMatches();
+
 }
 
-function attachInputEvents() {
-  document.querySelectorAll(".match-input, .bracket-score").forEach(input => {
-    input.onkeydown = e => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        handleUpdateFromInput(input);
-      }
-    };
-    input.oninput = () => handleUpdateFromInput(input);
-  });
+function renderMatches(){
+
+const matches =
+document.getElementById("matches");
+
+matches.innerHTML = "";
+
+schedule.forEach((match,index)=>{
+
+const t1 =
+groups[currentGroup]
+.teams[match[0]];
+
+const t2 =
+groups[currentGroup]
+.teams[match[1]];
+
+const saved =
+state.groups[currentGroup][index];
+
+matches.innerHTML += `
+
+<div class="match">
+
+<div class="team">
+
+<img
+class="flag"
+src="${t1[1]}">
+
+${t1[0]}
+
+</div>
+
+<div class="score-box">
+
+<input
+class="match-input"
+type="number"
+min="0"
+data-match="${index}"
+data-side="0"
+value="${saved[0]}">
+
+<div class="vs">VS</div>
+
+<input
+class="match-input"
+type="number"
+min="0"
+data-match="${index}"
+data-side="1"
+value="${saved[1]}">
+
+</div>
+
+<div class="team">
+
+<img
+class="flag"
+src="${t2[1]}">
+
+${t2[0]}
+
+</div>
+
+</div>
+
+`;
+
+});
+
+attachInputs();
+
 }
 
-function handleUpdateFromInput(input) {
-  if (input.classList.contains("match-input")) {
-    const g = input.dataset.group;
-    const m = Number(input.dataset.match);
-    const s = Number(input.dataset.side);
-    state.groupScores[g][m][s] = input.value;
-    saveState();
-    updateAll();
-    return;
-  }
+function attachInputs(){
 
-  if (input.classList.contains("bracket-score")) {
-    const round = input.dataset.round;
-    const match = Number(input.dataset.match);
-    const side = Number(input.dataset.side);
-    state.knockout[round][match][side] = input.value;
-    saveState();
-    updateAll();
-  }
+document
+.querySelectorAll(".match-input")
+.forEach(input=>{
+
+input.addEventListener(
+"keyup",
+e=>{
+
+saveMatchInput(input);
+
+if(e.key==="Enter"){
+
+updateAll();
+
 }
 
-function computeGroupStats(letter) {
-  const teams = groups[letter].teams;
-  const stats = {};
-  teams.forEach(t => {
-    stats[t[0]] = { pts: 0, gf: 0, gc: 0, dg: 0, flag: t[1] };
-  });
+}
+);
 
-  let complete = true;
+input.addEventListener(
+"change",
+()=>{
 
-  schedule.forEach((pair, i) => {
-    const r = state.groupScores[letter]?.[i] || ["", ""];
-    const a = r[0];
-    const b = r[1];
-    if (a === "" || b === "") {
-      complete = false;
-      return;
-    }
+saveMatchInput(input);
+updateAll();
 
-    const ga = parseInt(a, 10);
-    const gb = parseInt(b, 10);
+}
+);
 
-    const t1 = teams[pair[0]][0];
-    const t2 = teams[pair[1]][0];
+});
 
-    stats[t1].gf += ga;
-    stats[t1].gc += gb;
-
-    stats[t2].gf += gb;
-    stats[t2].gc += ga;
-
-    if (ga > gb) stats[t1].pts += 3;
-    else if (gb > ga) stats[t2].pts += 3;
-    else {
-      stats[t1].pts += 1;
-      stats[t2].pts += 1;
-    }
-  });
-
-  Object.keys(stats).forEach(name => {
-    stats[name].dg = stats[name].gf - stats[name].gc;
-  });
-
-  const table = Object.keys(stats).sort((a, b) => {
-    if (stats[b].pts !== stats[a].pts) return stats[b].pts - stats[a].pts;
-    if (stats[b].dg !== stats[a].dg) return stats[b].dg - stats[a].dg;
-    return stats[b].gf - stats[a].gf;
-  });
-
-  return { table, stats, complete };
 }
 
-function renderTable(letter, standing) {
-  const tbody = document.getElementById("table-body");
-  tbody.innerHTML = "";
+function saveMatchInput(input){
 
-  standing.table.forEach((team, idx) => {
-    const rowClass = idx < 2 ? "qualify" : idx === 2 ? "third" : "";
-    tbody.innerHTML += `
-      <tr class="${rowClass}">
-        <td>${idx + 1}</td>
-        <td>
-          <div class="table-team">
-            <img class="flag" src="${standing.stats[team].flag}" alt="${team}">
-            ${team}
-          </div>
-        </td>
-        <td>${standing.stats[team].pts}</td>
-        <td>${standing.stats[team].gf}</td>
-        <td>${standing.stats[team].gc}</td>
-        <td>${standing.stats[team].dg}</td>
-      </tr>
-    `;
-  });
+const match =
+Number(input.dataset.match);
+
+const side =
+Number(input.dataset.side);
+
+state.groups[currentGroup]
+[match][side] = input.value;
+
+saveState();
+
 }
 
-function updateAllStandings() {
-  allStandings = {};
+function calculateGroup(letter){
 
-  Object.keys(groups).forEach(letter => {
-    const st = computeGroupStats(letter);
-    allStandings[letter] = st;
-    if (letter === currentGroup) {
-      renderTable(letter, st);
-    }
-  });
+const stats = {};
+
+groups[letter]
+.teams
+.forEach(team=>{
+
+stats[team[0]] = {
+pts:0,
+gf:0,
+gc:0,
+dg:0,
+flag:team[1]
+};
+
+});
+
+let complete = true;
+
+schedule.forEach((match,index)=>{
+
+let a =
+state.groups[letter]
+[index][0];
+
+let b =
+state.groups[letter]
+[index][1];
+
+if(a==="" || b===""){
+
+complete = false;
+return;
+
 }
 
-function bestThirdsFromCompletedGroups() {
-  const thirds = [];
+a = parseInt(a);
+b = parseInt(b);
 
-  Object.keys(allStandings).forEach(letter => {
-    const st = allStandings[letter];
-    if (!st.complete) return;
-    thirds.push({
-      group: letter,
-      team: st.table[2],
-      stats: st.stats[st.table[2]]
-    });
-  });
+const teamA =
+groups[letter]
+.teams[match[0]][0];
 
-  thirds.sort((a, b) => {
-    if (b.stats.pts !== a.stats.pts) return b.stats.pts - a.stats.pts;
-    if (b.stats.dg !== a.stats.dg) return b.stats.dg - a.stats.dg;
-    return b.stats.gf - a.stats.gf;
-  });
+const teamB =
+groups[letter]
+.teams[match[1]][0];
 
-  return thirds.slice(0, 8);
+stats[teamA].gf += a;
+stats[teamA].gc += b;
+
+stats[teamB].gf += b;
+stats[teamB].gc += a;
+
+if(a>b){
+
+stats[teamA].pts += 3;
+
 }
 
-function generateR32Slots() {
-  const needed = {
-    A: allStandings.A?.table?.[0],
-    B: allStandings.B?.table?.[0],
-    C: allStandings.C?.table?.[0],
-    D: allStandings.D?.table?.[0],
-    E: allStandings.E?.table?.[0],
-    F: allStandings.F?.table?.[0],
-    G: allStandings.G?.table?.[0],
-    H: allStandings.H?.table?.[0],
-    I: allStandings.I?.table?.[0],
-    J: allStandings.J?.table?.[0],
-    K: allStandings.K?.table?.[0],
-    L: allStandings.L?.table?.[0],
-  };
+else if(b>a){
 
-  const seconds = {
-    A: allStandings.A?.table?.[1],
-    B: allStandings.B?.table?.[1],
-    C: allStandings.C?.table?.[1],
-    D: allStandings.D?.table?.[1],
-    E: allStandings.E?.table?.[1],
-    F: allStandings.F?.table?.[1],
-    G: allStandings.G?.table?.[1],
-    H: allStandings.H?.table?.[1],
-    I: allStandings.I?.table?.[1],
-    J: allStandings.J?.table?.[1],
-    K: allStandings.K?.table?.[1],
-    L: allStandings.L?.table?.[1],
-  };
+stats[teamB].pts += 3;
 
-  const thirds = bestThirdsFromCompletedGroups();
-
-  const thirdAt = i => thirds[i]?.team || null;
-
-  const left = [
-    [needed.A, seconds.B],
-    [needed.C, seconds.D],
-    [needed.E, seconds.F],
-    [needed.G, seconds.H],
-    [needed.I, seconds.J],
-    [needed.K, seconds.L],
-    [thirdAt(0), thirdAt(1)],
-    [thirdAt(2), thirdAt(3)]
-  ];
-
-  const right = [
-    [needed.B, seconds.A],
-    [needed.D, seconds.C],
-    [needed.F, seconds.E],
-    [needed.H, seconds.G],
-    [needed.J, seconds.I],
-    [needed.L, seconds.K],
-    [thirdAt(4), thirdAt(5)],
-    [thirdAt(6), thirdAt(7)]
-  ];
-
-  return { left, right };
 }
 
-function renderBracketColumn(containerId, matches, roundName, side) {
-  const container = document.getElementById(containerId);
-  container.innerHTML = "";
+else{
 
-  matches.forEach((match, idx) => {
-    const stateIndex = side === "left" ? idx : idx;
-    const stored = state.knockout[roundName]?.[stateIndex] || ["", ""];
-    const a = match[0] || null;
-    const b = match[1] || null;
+stats[teamA].pts += 1;
+stats[teamB].pts += 1;
 
-    container.innerHTML += `
-      <div class="bracket-match">
-        <div class="bracket-match-title">
-          ${a || b ? `Partido ${idx + 1}` : "Por definir"}
-        </div>
-
-        ${renderBracketTeam(a, roundName, stateIndex, 0, stored[0])}
-        ${renderBracketTeam(b, roundName, stateIndex, 1, stored[1])}
-      </div>
-    `;
-  });
 }
 
-function renderBracketTeam(teamName, round, matchIndex, side, scoreValue) {
-  const safeName = teamName || "<span class='placeholder'>Por definir</span>";
-  const flag = teamName ? teamLookup(teamName)[1] : "";
+});
 
-  return `
-    <div class="bracket-team">
-      <div class="bracket-left">
-        ${teamName ? `<img class="flag" src="${flag}" alt="${teamName}">` : ""}
-        <span>${safeName}</span>
-      </div>
-      <input
-        class="bracket-score"
-        type="number"
-        min="0"
-        inputmode="numeric"
-        data-round="${round}"
-        data-match="${matchIndex}"
-        data-side="${side}"
-        value="${scoreValue ?? ""}"
-      >
-    </div>
-  `;
+Object.keys(stats).forEach(team=>{
+
+stats[team].dg =
+stats[team].gf -
+stats[team].gc;
+
+});
+
+const sorted =
+Object.keys(stats)
+.sort((a,b)=>{
+
+if(stats[b].pts !== stats[a].pts){
+
+return stats[b].pts -
+stats[a].pts;
+
 }
 
-function winnerFromPair(teamA, teamB, scoreA, scoreB) {
-  if (!teamA || !teamB) return null;
-  if (scoreA === "" || scoreB === "") return null;
-  const a = parseInt(scoreA, 10);
-  const b = parseInt(scoreB, 10);
-  if (Number.isNaN(a) || Number.isNaN(b)) return null;
-  if (a === b) return null;
-  return a > b ? teamA : teamB;
+if(stats[b].dg !== stats[a].dg){
+
+return stats[b].dg -
+stats[a].dg;
+
 }
 
-function loserFromPair(teamA, teamB, scoreA, scoreB) {
-  const winner = winnerFromPair(teamA, teamB, scoreA, scoreB);
-  if (!winner) return null;
-  return winner === teamA ? teamB : teamA;
+return stats[b].gf -
+stats[a].gf;
+
+});
+
+return {
+table:sorted,
+stats,
+complete
+};
+
 }
 
-function buildKnockoutTeams() {
-  const { left: r32Left, right: r32Right } = generateR32Slots();
+function updateAllStandings(){
 
-  return {
-    r32: [...r32Left, ...r32Right]
-  };
+allStandings = {};
+
+Object.keys(groups)
+.forEach(group=>{
+
+allStandings[group] =
+calculateGroup(group);
+
+});
+
+renderCurrentTable();
+
 }
 
-function roundPairWinners(prevTeams, scores, roundName) {
-  const next = [];
-  for (let i = 0; i < prevTeams.length; i += 2) {
-    const teamA = prevTeams[i];
-    const teamB = prevTeams[i + 1];
-    const pairScores = scores[Math.floor(i / 2)] || ["", ""];
-    next.push(winnerFromPair(teamA, teamB, pairScores[0], pairScores[1]));
-  }
-  return next;
+function renderCurrentTable(){
+
+const tbody =
+document.getElementById("table-body");
+
+tbody.innerHTML = "";
+
+const standing =
+allStandings[currentGroup];
+
+standing.table
+.forEach((team,index)=>{
+
+const stats =
+standing.stats[team];
+
+tbody.innerHTML += `
+
+<tr class="
+${index<2 ? "qualify" : ""}
+${index===2 ? "third" : ""}
+">
+
+<td>${index+1}</td>
+
+<td>
+
+<div class="table-team">
+
+<img
+class="flag"
+src="${stats.flag}">
+
+${team}
+
+</div>
+
+</td>
+
+<td>${stats.pts}</td>
+<td>${stats.gf}</td>
+<td>${stats.gc}</td>
+<td>${stats.dg}</td>
+
+</tr>
+
+`;
+
+});
+
 }
 
-function roundPairLosers(prevTeams, scores) {
-  const next = [];
-  for (let i = 0; i < prevTeams.length; i += 2) {
-    const teamA = prevTeams[i];
-    const teamB = prevTeams[i + 1];
-    const pairScores = scores[Math.floor(i / 2)] || ["", ""];
-    next.push(loserFromPair(teamA, teamB, pairScores[0], pairScores[1]));
-  }
-  return next;
+function updateBracket(){
+
+const leftContainer =
+document.getElementById("r32-left");
+
+const rightContainer =
+document.getElementById("r32-right");
+
+leftContainer.innerHTML = "";
+rightContainer.innerHTML = "";
+
+const completedGroups =
+Object.keys(allStandings)
+.filter(g=>allStandings[g].complete);
+
+if(completedGroups.length < 12){
+
+return;
+
 }
 
-function renderBracket() {
-  const { left: r32Left, right: r32Right } = generateR32Slots();
-  const r32Teams = [...r32Left, ...r32Right];
+const firsts = {};
+const seconds = {};
+let thirds = [];
 
-  renderBracketColumn("r32-left", r32Left, "r32", "left");
-  renderBracketColumn("r32-right", r32Right, "r32", "right");
+completedGroups.forEach(group=>{
 
-  const r32Winners = roundPairWinners(r32Teams, state.knockout.r32, "r32");
-  const r16TeamsLeft = [r32Winners[0], r32Winners[1], r32Winners[2], r32Winners[3], r32Winners[4], r32Winners[5], r32Winners[6], r32Winners[7]];
-  const r16TeamsRight = [r32Winners[8], r32Winners[9], r32Winners[10], r32Winners[11], r32Winners[12], r32Winners[13], r32Winners[14], r32Winners[15]];
+firsts[group] =
+allStandings[group]
+.table[0];
 
-  renderBracketColumn("r16-left", [
-    [r16TeamsLeft[0], r16TeamsLeft[1]],
-    [r16TeamsLeft[2], r16TeamsLeft[3]],
-    [r16TeamsLeft[4], r16TeamsLeft[5]],
-    [r16TeamsLeft[6], r16TeamsLeft[7]],
-  ], "r16", "left");
+seconds[group] =
+allStandings[group]
+.table[1];
 
-  renderBracketColumn("r16-right", [
-    [r16TeamsRight[0], r16TeamsRight[1]],
-    [r16TeamsRight[2], r16TeamsRight[3]],
-    [r16TeamsRight[4], r16TeamsRight[5]],
-    [r16TeamsRight[6], r16TeamsRight[7]],
-  ], "r16", "right");
+thirds.push({
 
-  const r16WinnersLeft = roundPairWinners(r16TeamsLeft, state.knockout.r16, "r16");
-  const r16WinnersRight = roundPairWinners(r16TeamsRight, state.knockout.r16, "r16");
+group,
 
-  renderBracketColumn("qf-left", [
-    [r16WinnersLeft[0], r16WinnersLeft[1]],
-    [r16WinnersLeft[2], r16WinnersLeft[3]],
-  ], "qf", "left");
+team:
+allStandings[group]
+.table[2],
 
-  renderBracketColumn("qf-right", [
-    [r16WinnersRight[0], r16WinnersRight[1]],
-    [r16WinnersRight[2], r16WinnersRight[3]],
-  ], "qf", "right");
+stats:
+allStandings[group]
+.stats[
+allStandings[group]
+.table[2]
+]
 
-  const qfWinnersLeft = roundPairWinners(r16WinnersLeft, state.knockout.qf, "qf");
-  const qfWinnersRight = roundPairWinners(r16WinnersRight, state.knockout.qf, "qf");
+});
 
-  renderBracketColumn("sf-left", [
-    [qfWinnersLeft[0], qfWinnersLeft[1]],
-  ], "sf", "left");
+});
 
-  renderBracketColumn("sf-right", [
-    [qfWinnersRight[0], qfWinnersRight[1]],
-  ], "sf", "right");
+thirds.sort((a,b)=>{
 
-  const sfLeftTeams = [qfWinnersLeft[0], qfWinnersLeft[1]];
-  const sfRightTeams = [qfWinnersRight[0], qfWinnersRight[1]];
+if(b.stats.pts !== a.stats.pts){
 
-  const sfWinnerLeft = winnerFromPair(sfLeftTeams[0], sfLeftTeams[1], state.knockout.sf[0]?.[0] || "", state.knockout.sf[0]?.[1] || "");
-  const sfWinnerRight = winnerFromPair(sfRightTeams[0], sfRightTeams[1], state.knockout.sf[1]?.[0] || "", state.knockout.sf[1]?.[1] || "");
-  const sfLoserLeft = loserFromPair(sfLeftTeams[0], sfLeftTeams[1], state.knockout.sf[0]?.[0] || "", state.knockout.sf[0]?.[1] || "");
-  const sfLoserRight = loserFromPair(sfRightTeams[0], sfRightTeams[1], state.knockout.sf[1]?.[0] || "", state.knockout.sf[1]?.[1] || "");
+return b.stats.pts -
+a.stats.pts;
 
-  document.getElementById("third-box").innerHTML = `
-    <div class="final-box">
-      <div class="final-title">🥉 Tercer puesto</div>
-      ${renderBracketTeam(sfLoserLeft, "third", 0, 0, state.knockout.third.s1)}
-      ${renderBracketTeam(sfLoserRight, "third", 0, 1, state.knockout.third.s2)}
-    </div>
-  `;
-
-  document.getElementById("final-box").innerHTML = `
-    <div class="final-box">
-      <div class="final-title">🏆 Final</div>
-      ${renderBracketTeam(sfWinnerLeft, "final", 0, 0, state.knockout.final.s1)}
-      ${renderBracketTeam(sfWinnerRight, "final", 0, 1, state.knockout.final.s2)}
-    </div>
-  `;
-
-  attachInputEvents();
 }
 
-function updateAll() {
-  updateAllStandings();
-  renderBracket();
+if(b.stats.dg !== a.stats.dg){
+
+return b.stats.dg -
+a.stats.dg;
+
 }
 
-function initialize() {
-  renderGroupMenu();
-  renderGroup(currentGroup);
-  updateAll();
+return b.stats.gf -
+a.stats.gf;
+
+});
+
+const bestThirds =
+thirds.slice(0,8);
+
+const leftMatches = [
+
+[firsts["A"],seconds["B"]],
+[firsts["C"],seconds["D"]],
+[firsts["E"],seconds["F"]],
+[firsts["G"],seconds["H"]],
+[firsts["I"],seconds["J"]],
+[firsts["K"],seconds["L"]],
+[bestThirds[0]?.team,bestThirds[1]?.team],
+[bestThirds[2]?.team,bestThirds[3]?.team]
+
+];
+
+const rightMatches = [
+
+[firsts["B"],seconds["A"]],
+[firsts["D"],seconds["C"]],
+[firsts["F"],seconds["E"]],
+[firsts["H"],seconds["G"]],
+[firsts["J"],seconds["I"]],
+[firsts["L"],seconds["K"]],
+[bestThirds[4]?.team,bestThirds[5]?.team],
+[bestThirds[6]?.team,bestThirds[7]?.team]
+
+];
+
+renderSide(
+leftContainer,
+leftMatches
+);
+
+renderSide(
+rightContainer,
+rightMatches
+);
+
 }
 
-initialize();
+function renderSide(container,matches){
+
+matches.forEach((match,index)=>{
+
+container.innerHTML += `
+
+<div class="bracket-match">
+
+<div class="bracket-match-title">
+
+Partido ${index+1}
+
+</div>
+
+${renderTeam(match[0])}
+
+${renderTeam(match[1])}
+
+</div>
+
+`;
+
+});
+
+}
+
+function renderTeam(team){
+
+if(!team){
+
+return `
+
+<div class="bracket-team">
+
+<div class="placeholder">
+
+Por definir
+
+</div>
+
+<input
+class="bracket-score"
+type="number">
+
+</div>
+
+`;
+
+}
+
+const data =
+findTeam(team);
+
+return `
+
+<div class="bracket-team">
+
+<div class="bracket-left">
+
+<img
+class="flag"
+src="${data[1]}">
+
+${team}
+
+</div>
+
+<input
+class="bracket-score"
+type="number">
+
+</div>
+
+`;
+
+}
+
+function findTeam(name){
+
+for(const group in groups){
+
+const found =
+groups[group]
+.teams
+.find(t=>t[0]===name);
+
+if(found){
+
+return found;
+
+}
+
+}
+
+return [name,""];
+
+}
+
+function updateAll(){
+
+updateAllStandings();
+
+updateBracket();
+
+}
+
+createSidebar();
+
+loadGroup(currentGroup);
+
+updateAll();
