@@ -1,363 +1,407 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mundial 2026 Tracker</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: white;
-      margin: 20px;
+<title>Mundial 2026</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:
+    linear-gradient(rgba(10,10,10,.92),rgba(10,10,10,.95)),
+    url('https://images.unsplash.com/photo-1517927033932-b3d18e61fb3a?q=80&w=2070');
+    background-size:cover;
+    background-attachment:fixed;
+    color:white;
+    padding:30px;
+}
+
+h1{
+    text-align:center;
+    font-size:3rem;
+    margin-bottom:40px;
+    font-weight:700;
+}
+
+#contenedor-grupos{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(500px,1fr));
+    gap:30px;
+}
+
+.grupo{
+    background:rgba(25,25,25,.95);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;
+    padding:25px;
+    backdrop-filter:blur(10px);
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+    transition:.3s;
+}
+
+.grupo:hover{
+    transform:translateY(-5px);
+}
+
+.grupo h2{
+    margin-bottom:20px;
+    font-size:1.8rem;
+}
+
+.partido{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:15px;
+    background:#222;
+    padding:10px;
+    border-radius:12px;
+}
+
+.equipo{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    width:150px;
+}
+
+.bandera{
+    width:28px;
+    height:20px;
+    object-fit:cover;
+    border-radius:3px;
+}
+
+input{
+    width:55px;
+    height:40px;
+    background:#111;
+    border:2px solid #333;
+    color:white;
+    border-radius:10px;
+    text-align:center;
+    font-size:1rem;
+    transition:.2s;
+}
+
+input:focus{
+    outline:none;
+    border-color:#00ff9d;
+}
+
+.vs{
+    font-weight:700;
+    opacity:.7;
+}
+
+table{
+    width:100%;
+    margin-top:25px;
+    border-collapse:collapse;
+    overflow:hidden;
+    border-radius:15px;
+}
+
+th{
+    background:#00c977;
+    padding:12px;
+    font-size:.9rem;
+}
+
+td{
+    padding:12px;
+    text-align:center;
+    border-bottom:1px solid rgba(255,255,255,.05);
+    background:#1a1a1a;
+}
+
+tr:hover td{
+    background:#252525;
+}
+
+.equipo-tabla{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.clasificados{
+    margin-top:20px;
+    background:#111;
+    padding:15px;
+    border-radius:12px;
+}
+
+.clasificados h3{
+    margin-bottom:10px;
+    color:#00ff9d;
+}
+
+.top{
+    color:#00ff9d;
+    font-weight:600;
+}
+
+@media(max-width:700px){
+
+    #contenedor-grupos{
+        grid-template-columns:1fr;
     }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 40px;
+    .partido{
+        flex-direction:column;
     }
 
-    .grupo {
-      border: 1px solid #333;
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 30px;
-      background: #1c1c1c;
+    .equipo{
+        justify-content:center;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
-    }
+}
 
-    th, td {
-      border: 1px solid #444;
-      padding: 8px;
-      text-align: center;
-    }
-
-    th {
-      background: #222;
-    }
-
-    input {
-      width: 50px;
-      text-align: center;
-      padding: 5px;
-    }
-
-    .partido {
-      margin-bottom: 10px;
-    }
-
-    .clasificados {
-      margin-top: 15px;
-      font-weight: bold;
-      color: #00ff88;
-    }
-
-    .terceros {
-      margin-top: 40px;
-      padding: 20px;
-      border-radius: 10px;
-      background: #1a1a1a;
-    }
-
-    .fase-final {
-      margin-top: 40px;
-      padding: 20px;
-      background: #191919;
-      border-radius: 10px;
-    }
-
-    button {
-      background: #00aa66;
-      border: none;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    button:hover {
-      background: #00cc77;
-    }
-  </style>
+</style>
 </head>
 <body>
 
-<h1>Mundial 2026</h1>
+<h1>🏆 Mundial 2026</h1>
 
 <div id="contenedor-grupos"></div>
-
-<div class="terceros">
-  <h2>Mejores terceros</h2>
-  <div id="mejores-terceros"></div>
-</div>
-
-<div class="fase-final">
-  <h2>Clasificados a dieciseisavos</h2>
-  <div id="clasificados-finales"></div>
-</div>
 
 <script>
 
 const grupos = {
-  A: ["México", "Sudáfrica", "Corea del Sur", "República Checa"],
-  B: ["Canadá", "Bosnia", "Qatar", "Suiza"],
-  C: ["Brasil", "Marruecos", "Haití", "Escocia"],
-  D: ["Estados Unidos", "Paraguay", "Australia", "Turquía"],
-  E: ["Alemania", "Curazao", "Costa de Marfil", "Ecuador"],
-  F: ["Países Bajos", "Japón", "Suecia", "Túnez"],
-  G: ["Bélgica", "Egipto", "Irlanda", "Venezuela"],
-  H: ["España", "Uruguay", "Arabia Saudita", "Cabo Verde"],
-  I: ["Francia", "Irak", "Dinamarca", "Camerún"],
-  J: ["Argentina", "Austria", "Jordania", "Nigeria"],
-  K: ["Italia", "Colombia", "Noruega", "Nueva Zelanda"],
-  L: ["Inglaterra", "Croacia", "Ghana", "Panamá"]
+
+A:[
+["México","https://flagcdn.com/w40/mx.png"],
+["Sudáfrica","https://flagcdn.com/w40/za.png"],
+["Corea del Sur","https://flagcdn.com/w40/kr.png"],
+["República Checa","https://flagcdn.com/w40/cz.png"]
+]
+
 };
 
 const contenedor = document.getElementById("contenedor-grupos");
 
-function crearGrupo(nombre, equipos) {
+function crearGrupo(nombre,equipos){
 
-  const div = document.createElement("div");
-  div.className = "grupo";
+    const partidos = [
+        [0,1],
+        [2,3],
+        [0,2],
+        [1,3],
+        [0,3],
+        [1,2]
+    ];
 
-  let partidosHTML = "";
+    const div = document.createElement("div");
+    div.className = "grupo";
 
-  const partidos = [
-    [0,1],
-    [2,3],
-    [0,2],
-    [1,3],
-    [0,3],
-    [1,2]
-  ];
+    let htmlPartidos = "";
 
-  partidos.forEach((p, index) => {
-    partidosHTML += `
-      <div class="partido">
-        ${equipos[p[0]]}
-        <input type="number" min="0" value="" id="${nombre}-${index}-a">
-        vs
-        <input type="number" min="0" value="" id="${nombre}-${index}-b">
-        ${equipos[p[1]]}
-      </div>
-    `;
-  });
+    partidos.forEach((p,index)=>{
 
-  div.innerHTML = `
+        htmlPartidos += `
+
+        <div class="partido">
+
+            <div class="equipo">
+                <img class="bandera" src="${equipos[p[0]][1]}">
+                ${equipos[p[0]][0]}
+            </div>
+
+            <input type="number" min="0" id="${nombre}-${index}-a">
+
+            <div class="vs">VS</div>
+
+            <input type="number" min="0" id="${nombre}-${index}-b">
+
+            <div class="equipo">
+                <img class="bandera" src="${equipos[p[1]][1]}">
+                ${equipos[p[1]][0]}
+            </div>
+
+        </div>
+
+        `;
+    });
+
+    div.innerHTML = `
+
     <h2>Grupo ${nombre}</h2>
 
-    ${partidosHTML}
-
-    <button onclick="actualizarGrupo('${nombre}')">
-      Actualizar tabla
-    </button>
+    ${htmlPartidos}
 
     <table id="tabla-${nombre}">
-      <thead>
-        <tr>
-          <th>Equipo</th>
-          <th>PTS</th>
-          <th>GF</th>
-          <th>GC</th>
-          <th>DG</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
+        <thead>
+            <tr>
+                <th>Equipo</th>
+                <th>PTS</th>
+                <th>GF</th>
+                <th>GC</th>
+                <th>DG</th>
+            </tr>
+        </thead>
+
+        <tbody></tbody>
+
     </table>
 
     <div class="clasificados" id="clasificados-${nombre}"></div>
-  `;
 
-  contenedor.appendChild(div);
-
-  actualizarGrupo(nombre);
-}
-
-function actualizarGrupo(nombre) {
-
-  const equipos = grupos[nombre];
-
-  const stats = {};
-
-  equipos.forEach(eq => {
-    stats[eq] = {
-      pts: 0,
-      gf: 0,
-      gc: 0,
-      dg: 0
-    };
-  });
-
-  const partidos = [
-    [0,1],
-    [2,3],
-    [0,2],
-    [1,3],
-    [0,3],
-    [1,2]
-  ];
-
-  partidos.forEach((p, index) => {
-
-    const a = document.getElementById(`${nombre}-${index}-a`).value;
-    const b = document.getElementById(`${nombre}-${index}-b`).value;
-
-    if(a === "" || b === "") return;
-
-    const ga = parseInt(a);
-    const gb = parseInt(b);
-
-    const eqA = equipos[p[0]];
-    const eqB = equipos[p[1]];
-
-    stats[eqA].gf += ga;
-    stats[eqA].gc += gb;
-
-    stats[eqB].gf += gb;
-    stats[eqB].gc += ga;
-
-    if(ga > gb) {
-      stats[eqA].pts += 3;
-    }
-    else if(gb > ga) {
-      stats[eqB].pts += 3;
-    }
-    else {
-      stats[eqA].pts += 1;
-      stats[eqB].pts += 1;
-    }
-  });
-
-  equipos.forEach(eq => {
-    stats[eq].dg = stats[eq].gf - stats[eq].gc;
-  });
-
-  const ordenados = [...equipos].sort((a,b) => {
-
-    if(stats[b].pts !== stats[a].pts)
-      return stats[b].pts - stats[a].pts;
-
-    if(stats[b].dg !== stats[a].dg)
-      return stats[b].dg - stats[a].dg;
-
-    return stats[b].gf - stats[a].gf;
-  });
-
-  const tbody = document.querySelector(`#tabla-${nombre} tbody`);
-
-  tbody.innerHTML = "";
-
-  ordenados.forEach(eq => {
-
-    const fila = document.createElement("tr");
-
-    fila.innerHTML = `
-      <td>${eq}</td>
-      <td>${stats[eq].pts}</td>
-      <td>${stats[eq].gf}</td>
-      <td>${stats[eq].gc}</td>
-      <td>${stats[eq].dg}</td>
     `;
 
-    tbody.appendChild(fila);
-  });
+    contenedor.appendChild(div);
 
-  document.getElementById(`clasificados-${nombre}`).innerHTML = `
-    Clasificados directos: <br>
-    1° ${ordenados[0]}<br>
-    2° ${ordenados[1]}<br>
-    3° ${ordenados[2]}
-  `;
+    document.querySelectorAll("input").forEach(input=>{
 
-  actualizarMejoresTerceros();
-}
+        input.addEventListener("keyup",(e)=>{
 
-function actualizarMejoresTerceros() {
+            if(e.key === "Enter"){
+                actualizarGrupo(nombre);
+            }
 
-  const terceros = [];
+        });
 
-  Object.keys(grupos).forEach(nombre => {
-
-    const tabla = [];
-
-    const filas = document.querySelectorAll(`#tabla-${nombre} tbody tr`);
-
-    filas.forEach(f => {
-      tabla.push({
-        equipo: f.children[0].innerText,
-        pts: parseInt(f.children[1].innerText),
-        gf: parseInt(f.children[2].innerText),
-        gc: parseInt(f.children[3].innerText),
-        dg: parseInt(f.children[4].innerText)
-      });
     });
 
-    if(tabla.length === 4)
-      terceros.push(tabla[2]);
-  });
+    actualizarGrupo(nombre);
 
-  terceros.sort((a,b) => {
+}
 
-    if(b.pts !== a.pts)
-      return b.pts - a.pts;
+function actualizarGrupo(nombre){
 
-    if(b.dg !== a.dg)
-      return b.dg - a.dg;
+    const equipos = grupos[nombre];
 
-    return b.gf - a.gf;
-  });
+    const tabla = {};
 
-  const mejores8 = terceros.slice(0,8);
+    equipos.forEach(eq=>{
 
-  const div = document.getElementById("mejores-terceros");
+        tabla[eq[0]] = {
+            pts:0,
+            gf:0,
+            gc:0,
+            dg:0,
+            bandera:eq[1]
+        };
 
-  div.innerHTML = "";
+    });
 
-  mejores8.forEach((t,index) => {
-    div.innerHTML += `
-      ${index+1}. ${t.equipo} (${t.pts} pts)<br>
+    const partidos = [
+        [0,1],
+        [2,3],
+        [0,2],
+        [1,3],
+        [0,3],
+        [1,2]
+    ];
+
+    partidos.forEach((p,index)=>{
+
+        const a = document.getElementById(`${nombre}-${index}-a`).value;
+        const b = document.getElementById(`${nombre}-${index}-b`).value;
+
+        if(a==="" || b==="") return;
+
+        const ga = parseInt(a);
+        const gb = parseInt(b);
+
+        const eqA = equipos[p[0]][0];
+        const eqB = equipos[p[1]][0];
+
+        tabla[eqA].gf += ga;
+        tabla[eqA].gc += gb;
+
+        tabla[eqB].gf += gb;
+        tabla[eqB].gc += ga;
+
+        if(ga>gb){
+            tabla[eqA].pts += 3;
+        }
+
+        else if(gb>ga){
+            tabla[eqB].pts += 3;
+        }
+
+        else{
+            tabla[eqA].pts += 1;
+            tabla[eqB].pts += 1;
+        }
+
+    });
+
+    Object.keys(tabla).forEach(eq=>{
+        tabla[eq].dg = tabla[eq].gf - tabla[eq].gc;
+    });
+
+    const ordenados = Object.keys(tabla).sort((a,b)=>{
+
+        if(tabla[b].pts !== tabla[a].pts)
+            return tabla[b].pts - tabla[a].pts;
+
+        if(tabla[b].dg !== tabla[a].dg)
+            return tabla[b].dg - tabla[a].dg;
+
+        return tabla[b].gf - tabla[a].gf;
+
+    });
+
+    const tbody = document.querySelector(`#tabla-${nombre} tbody`);
+
+    tbody.innerHTML = "";
+
+    ordenados.forEach(eq=>{
+
+        tbody.innerHTML += `
+
+        <tr>
+
+            <td>
+
+                <div class="equipo-tabla">
+                    <img class="bandera" src="${tabla[eq].bandera}">
+                    ${eq}
+                </div>
+
+            </td>
+
+            <td>${tabla[eq].pts}</td>
+            <td>${tabla[eq].gf}</td>
+            <td>${tabla[eq].gc}</td>
+            <td>${tabla[eq].dg}</td>
+
+        </tr>
+
+        `;
+
+    });
+
+    document.getElementById(`clasificados-${nombre}`).innerHTML = `
+
+    <h3>Clasificados</h3>
+
+    <div class="top">1° ${ordenados[0]}</div>
+    <div class="top">2° ${ordenados[1]}</div>
+
     `;
-  });
 
-  actualizarClasificados(mejores8);
 }
 
-function actualizarClasificados(mejores8) {
+Object.keys(grupos).forEach(g=>{
 
-  const clasificados = [];
+    crearGrupo(g,grupos[g]);
 
-  Object.keys(grupos).forEach(nombre => {
-
-    const filas = document.querySelectorAll(`#tabla-${nombre} tbody tr`);
-
-    if(filas.length >= 2) {
-      clasificados.push(filas[0].children[0].innerText);
-      clasificados.push(filas[1].children[0].innerText);
-    }
-  });
-
-  mejores8.forEach(t => {
-    clasificados.push(t.equipo);
-  });
-
-  const div = document.getElementById("clasificados-finales");
-
-  div.innerHTML = "";
-
-  clasificados.forEach((c,index) => {
-    div.innerHTML += `${index+1}. ${c}<br>`;
-  });
-}
-
-Object.keys(grupos).forEach(g => {
-  crearGrupo(g, grupos[g]);
 });
 
 </script>
