@@ -40,7 +40,6 @@ body::before{
     border-bottom:1px solid rgba(255,255,255,.08);
     display:flex;
     align-items:center;
-    justify-content:space-between;
     padding:0 40px;
     background:rgba(0,0,0,.25);
     backdrop-filter:blur(10px);
@@ -58,27 +57,6 @@ body::before{
 
 .logo span{
     color:#39ff88;
-}
-
-.live{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-size:1rem;
-}
-
-.dot{
-    width:12px;
-    height:12px;
-    background:#39ff88;
-    border-radius:50%;
-    animation:pulse 1s infinite;
-}
-
-@keyframes pulse{
-    0%{opacity:1;}
-    50%{opacity:.4;}
-    100%{opacity:1;}
 }
 
 .main{
@@ -338,6 +316,7 @@ td{
 
 </style>
 </head>
+
 <body>
 
 <div class="header">
@@ -351,25 +330,75 @@ td{
         </div>
     </div>
 
-    <div class="live">
-        <div class="dot"></div>
-        En vivo
-    </div>
-
 </div>
 
 <div class="main">
 
-    <div class="sidebar">
+<div class="sidebar">
 
-        <h2>GRUPOS</h2>
+    <h2>GRUPOS</h2>
 
-        <div class="grupo-btn active">
-            <div class="circle" style="background:#26a65b;">🇲🇽</div>
-            Grupo A
-        </div>
-
+    <div class="grupo-btn active">
+        <div class="circle" style="background:#26a65b;">A</div>
+        Grupo A
     </div>
+
+    <div class="grupo-btn">
+        <div class="circle" style="background:#e74c3c;">B</div>
+        Grupo B
+    </div>
+
+    <div class="grupo-btn">
+        <div class="circle" style="background:#f39c12;">C</div>
+        Grupo C
+    </div>
+
+    <div class="grupo-btn">
+        <div class="circle" style="background:#c0392b;">D</div>
+        Grupo D
+    </div>
+
+    <div class="grupo-btn">
+        <div class="circle" style="background:#27ae60;">E</div>
+        Grupo E
+    </div>
+
+    <div class="grupo-btn">
+        <div class="circle" style="background:#2e86de;">F</div>
+        Grupo F
+    </div>
+
+    <div class="grupo-btn">
+        <div class="circle" style="background:#f1c40f;">G</div>
+        Grupo G
+    </div>
+
+    <div class="grupo-btn">
+        <div class="circle" style="background:#ff0033;">H</div>
+        Grupo H
+    </div>
+
+    <div class="grupo-btn">
+        <div class="circle" style="background:#6c5ce7;">I</div>
+        Grupo I
+    </div>
+
+    <div class="grupo-btn">
+        <div class="circle" style="background:#0984e3;">J</div>
+        Grupo J
+    </div>
+
+    <div class="grupo-btn">
+        <div class="circle" style="background:#6c5ce7;">K</div>
+        Grupo K
+    </div>
+
+    <div class="grupo-btn">
+        <div class="circle" style="background:#e67e22;">L</div>
+        Grupo L
+    </div>
+
+</div>
 
     <div class="content">
 
